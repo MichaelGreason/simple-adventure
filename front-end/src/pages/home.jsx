@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <>
-      <h1 className="header">Counter: {count} </h1>
+      <h1 className="">Counter: {count} </h1>
       <button onClick={addCount}>Add</button>
       <button onClick={subtractCount}>Subtract</button>
     </>
