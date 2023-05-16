@@ -3,4 +3,16 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+    name = models.CharField(default='Player')
+    hit_points = models.IntegerField(default=0)
+    attack = models.IntegerField(default=0)
+    defense = models.IntegerField(default=0)
+    damage = models.IntegerField(default=0)
+
+
+class Enemy(models.Model):
+    name = models.CharField(default='Enemy')
+    hit_points = models.IntegerField(default=0)
+    attack = models.IntegerField(default=0)
+    defense = models.IntegerField(default=0)
+    damage = models.IntegerField(default=0)
