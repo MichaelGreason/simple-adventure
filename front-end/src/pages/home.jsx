@@ -89,6 +89,24 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <div
+        style={{
+          borderRadius: "",
+          position: "absolute",
+          bottom: "2rem",
+          right: "2rem",
+        }}
+      >
+        <button
+          style={{
+            height: "5rem",
+            width: "5rem",
+            borderRadius: "50%",
+          }}
+        >
+          Play
+        </button>
+      </div>
       {/* <div
         style={{
           textAlign: "center",
