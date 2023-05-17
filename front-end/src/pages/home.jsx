@@ -34,30 +34,59 @@ export default function Home() {
             alignSelf: "center",
           }}
         ></img>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyItems: "center",
-            alignItems: "center",
-          }}
-        >
-          <p
-            className="text"
+        <div style={{ display: "flex", width: "50%" }}>
+          <div
             style={{
-              marginLeft: "2rem",
+              display: "flex",
+              flexDirection: "column",
+              justifyItems: "center",
+              alignItems: "center",
+              marginLeft: "20%",
             }}
           >
-            Name:
-          </p>
-          <p
-            className="text"
+            <p
+              className="text"
+              style={{
+                marginLeft: "2rem",
+              }}
+            >
+              Name:
+            </p>
+            <p
+              className="text"
+              style={{
+                marginLeft: "2rem",
+              }}
+            >
+              Weapon:
+            </p>
+          </div>
+          <div
             style={{
-              marginLeft: "2rem",
+              display: "flex",
+              flexDirection: "column",
+              justifyItems: "center",
+              alignItems: "center",
+              marginLeft: "20%",
             }}
           >
-            Weapon:
-          </p>
+            <p
+              className="text"
+              style={{
+                marginLeft: "2rem",
+              }}
+            >
+              Wins:
+            </p>
+            <p
+              className="text"
+              style={{
+                marginLeft: "2rem",
+              }}
+            >
+              Losses:
+            </p>
+          </div>
         </div>
       </div>
       {/* <div
