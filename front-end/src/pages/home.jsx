@@ -13,7 +13,9 @@ export default function Home() {
 
   return (
     <>
-      <h1 className="">Counter: {count} </h1>
+      <div style={{ background: "blue" }}>
+        <h1>Counter: {count} </h1>
+      </div>
       <button onClick={addCount}>Add</button>
       <button onClick={subtractCount}>Subtract</button>
     </>
