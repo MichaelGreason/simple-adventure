@@ -13,11 +13,26 @@ export default function Home() {
 
   return (
     <>
-      <div style={{ background: "blue" }}>
+      <div style={{ textAlign: "center" }}>
         <h1>Counter: {count} </h1>
       </div>
-      <button onClick={addCount}>Add</button>
-      <button onClick={subtractCount}>Subtract</button>
+      <div
+        style={{
+          textAlign: "center",
+          display: "flex",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <button style={{ width: "10rem", height: "10rem" }} onClick={addCount}>
+          Add
+        </button>
+        <button
+          style={{ width: "10rem", height: "10rem" }}
+          onClick={subtractCount}
+        >
+          Subtract
+        </button>
+      </div>
     </>
   );
 }
