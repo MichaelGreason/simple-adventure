@@ -102,9 +102,11 @@ export default function Home() {
             height: "5rem",
             width: "5rem",
             borderRadius: "50%",
+            fontFamily: "'Darumadrop One'",
+            fontSize: "1rem",
           }}
         >
-          Play
+          PLAY
         </button>
       </div>
       {/* <div
