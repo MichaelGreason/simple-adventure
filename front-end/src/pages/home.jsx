@@ -30,7 +30,7 @@ export default function Home() {
           className="avatar"
           style={{
             height: "10rem",
-            borderRadius: "50%",
+
             alignSelf: "center",
           }}
         ></img>
