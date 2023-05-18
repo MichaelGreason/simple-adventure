@@ -5,4 +5,5 @@ import random
 
 
 def roll_d20():
-    return random.randint(1, 20)
+    roll = random.randint(1, 20)
+    return roll
