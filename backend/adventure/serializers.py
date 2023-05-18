@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class EnemySerializer(serializers.Modelserializer):
+class EnemySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Enemy
