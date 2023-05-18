@@ -16,3 +16,6 @@ class Enemy(models.Model):
     attack = models.IntegerField(default=0)
     defense = models.IntegerField(default=0)
     damage = models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name_plural = 'enemies'
