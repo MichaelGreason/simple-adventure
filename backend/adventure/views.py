@@ -14,5 +14,18 @@ def enemy_roll_d20():
     return enemy_roll
 
 
-def determine_initiative(player_roll_d20, enemy_roll_d20):
-    pass
+def determine_initiative():
+    # player_roll_d20() == player_roll
+    # player_speed = player_roll + User.speed
+    player_speed = User.speed + player_roll_d20()
+
+    # enemy_roll_d20() == enemy_roll
+    # enemy_speed = enemy_roll + Enemy.speed
+    enemy_speed = Enemy.speed + enemy_roll_d20()
+
+    if player_speed > enemy_speed:
+        pass
+    elif player_speed < enemy_speed:
+        pass
+    else:
+        determine_initiative()
