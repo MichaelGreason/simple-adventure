@@ -10,6 +10,8 @@ class User(AbstractUser):
     speed = models.IntegerField(default=0)
     weapon = models.ManyToManyField(
         to='Weapon', blank=True, related_name='user')
+    wins = models.IntegerField(default=0)
+    losses = models.IntegerField(default=0)
 
 
 class Enemy(models.Model):
