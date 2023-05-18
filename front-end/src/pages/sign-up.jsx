@@ -4,7 +4,10 @@ import { Button, Form } from "semantic-ui-react";
 export default function SignUp() {
   return (
     <>
-      <Form>
+      <div>
+        <h1 className="">Sign Up!</h1>
+      </div>
+      <Form className=" mx-5 mt-20 w-2/5">
         <Form.Field>
           <label>First Name</label>
           <input placeholder="First Name" />
