@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-from django.contrib.auth.models import User, Enemy
+from django.contrib.auth.models import User, Enemy, Weapon
 from rest_framework import generics
 import random
 
