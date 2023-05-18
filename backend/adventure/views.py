@@ -4,6 +4,15 @@ from rest_framework import generics
 import random
 
 
-def roll_d20():
-    roll = random.randint(1, 20)
-    return roll
+def player_roll_d20():
+    player_roll = random.randint(1, 20)
+    return player_roll
+
+
+def enemy_roll_d20():
+    enemy_roll = random.randint(1, 20)
+    return enemy_roll
+
+
+def determine_initiative(player_roll_d20, enemy_roll_d20):
+    pass
