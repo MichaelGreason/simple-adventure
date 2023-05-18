@@ -1,7 +1,15 @@
 # from django.shortcuts import render
-from django.contrib.auth.models import User, Enemy, Weapon
-from rest_framework import generics
 import random
+from rest_framework import generics
+from .models import User, Enemy, Weapon
+from .serializers import UserSerializer, EnemySerializer
+
+
+class UserProfile(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user
 
 
 def player_roll_d20():
