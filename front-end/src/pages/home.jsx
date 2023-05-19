@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
   const navigate = useNavigate();
 
+  function handlePlay() {
+    navigate("/play");
+  }
+
   return (
     <>
       <div className=" text-center mt-10">
@@ -30,7 +34,7 @@ export default function Home() {
         </div>
       </div>
       <div className="mt-10 text-center">
-        <Button className="h-20" color="red" circular>
+        <Button className="h-20" color="red" circular onClick={handlePlay}>
           <span className="font-cursive">PLAY</span>
         </Button>
       </div>
