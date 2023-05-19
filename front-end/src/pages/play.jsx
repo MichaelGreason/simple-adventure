@@ -11,6 +11,8 @@ export default function Play() {
   const an = [11, 18];
   const [userHP, setUserHP] = useState(10);
   const [enemyHP, setEnemyHP] = useState(10);
+  const [userSpeed, setUserSpeed] = useState(5);
+  const [enemySpeed, setEnemySpeed] = useState(5);
 
   function rollDie() {
     setRoll(_.random(1, 20));
@@ -24,14 +26,21 @@ export default function Play() {
   return (
     <>
       <div className=" flex justify-center items-center flex-col h-screen">
-        <div className="flex flex-col mb-10">
-          <div className="font-cursive text-xl self-center">HP: {enemyHP}</div>
+        <div className="flex mb-10">
           <img
             src="/src/temp-img/hero1.png"
             alt="avatar"
             className="h-48 self-center"
           ></img>
-          <div className="font-cursive text-xl mt-2 self-center">Enemy</div>
+          <div className="flex flex-col text-center justify-center">
+            <div className="font-cursive text-3xl self-center">Enemy</div>
+            <div className="font-cursive text-xl self-center">
+              HP: {enemyHP}
+            </div>
+            <div className="font-cursive text-xl self-center">
+              Speed: {enemySpeed}
+            </div>
+          </div>
         </div>
         <div className="flex items-center justify-center">
           <img
@@ -45,14 +54,19 @@ export default function Play() {
               : `You rolled a ${roll}`}{" "}
           </div>
         </div>
-        <div className="flex flex-col mt-10">
-          <div className="font-cursive text-xl mb-2 self-center">User</div>
+        <div className="flex mt-10">
           <img
             src="/src/temp-img/hero1.png"
             alt="avatar"
             className="h-48 self-center"
           ></img>
-          <div className="font-cursive text-xl self-center">HP: {userHP}</div>
+          <div className="flex flex-col text-center justify-center">
+            <div className="font-cursive text-3xl self-center">User</div>
+            <div className="font-cursive text-xl self-center">HP: {userHP}</div>
+            <div className="font-cursive text-xl self-center">
+              Speed: {userSpeed}
+            </div>
+          </div>
         </div>
       </div>
       <div className="absolute bottom-5 left-5">
