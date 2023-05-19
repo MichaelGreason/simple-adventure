@@ -22,3 +22,5 @@ you have to put auth before all of these
 - /jwt/create/ (JSON Web Token Authentication)
 - /jwt/refresh/ (JSON Web Token Authentication)
 - /jwt/verify/ (JSON Web Token Authentication)
+
+- /profile (for profile update/edit/destroy)
