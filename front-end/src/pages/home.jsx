@@ -34,7 +34,7 @@ export default function Home() {
         </div>
       </div>
       <div className="mt-10 text-center">
-        <Button className="h-20" color="red" circular onClick={handlePlay}>
+        <Button className="h-20" color="black" circular onClick={handlePlay}>
           <span className="font-cursive">PLAY</span>
         </Button>
       </div>

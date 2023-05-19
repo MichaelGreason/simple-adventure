@@ -21,7 +21,7 @@ export default function Play() {
   return (
     <>
       <div className="absolute bottom-5 left-5">
-        <Button onClick={handleQuit}>
+        <Button color="black" onClick={handleQuit}>
           <span className="font-cursive">QUIT</span>
         </Button>
       </div>
