@@ -28,11 +28,11 @@ export default function Play() {
       <div className=" flex justify-center items-center flex-col h-screen">
         <div className="flex mb-10">
           <img
-            src="/src/temp-img/hero1.png"
+            src="/src/temp-img/ogre.png"
             alt="avatar"
             className="h-48 self-center"
           ></img>
-          <div className="flex flex-col text-center justify-center">
+          <div className="flex flex-col text-center justify-center ml-5">
             <div className="font-cursive text-3xl self-center">Enemy</div>
             <div className="font-cursive text-xl self-center">
               HP: {enemyHP}
@@ -46,21 +46,21 @@ export default function Play() {
           <img
             onClick={rollDie}
             className="w-1/5 cursor-pointer"
-            src="src/temp-img/pngwing.com.png"
+            src="/src/temp-img/20sideddie.png"
           />
           <div className="text-xl font-cursive">
             {an.includes(roll)
-              ? `You rolled an ${roll}`
-              : `You rolled a ${roll}`}{" "}
+              ? `You rolled an ${roll} `
+              : `You rolled a ${roll} `}{" "}
           </div>
         </div>
         <div className="flex mt-10">
           <img
-            src="/src/temp-img/hero1.png"
+            src="/src/temp-img/paladin.png"
             alt="avatar"
             className="h-48 self-center"
           ></img>
-          <div className="flex flex-col text-center justify-center">
+          <div className="flex flex-col text-center justify-center ml-5">
             <div className="font-cursive text-3xl self-center">User</div>
             <div className="font-cursive text-xl self-center">HP: {userHP}</div>
             <div className="font-cursive text-xl self-center">
@@ -69,7 +69,7 @@ export default function Play() {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-5 left-5">
+      <div className="absolute top-5 right-5">
         <Button color="black" onClick={handleQuit}>
           <span className="font-cursive">QUIT</span>
         </Button>
