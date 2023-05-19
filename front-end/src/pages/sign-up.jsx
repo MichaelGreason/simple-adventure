@@ -21,6 +21,10 @@ export default function SignUp() {
         <div className="flex justify-center h-screen">
           <Form className="font-cursive mx-5 mt-10 w-2/5 ">
             <Form.Field>
+              <label>Email</label>
+              <input placeholder="Email" />
+            </Form.Field>
+            <Form.Field>
               <label>First Name</label>
               <input placeholder="First Name" />
             </Form.Field>
@@ -31,6 +35,14 @@ export default function SignUp() {
             <Form.Field>
               <label>Username</label>
               <input placeholder="Username" />
+            </Form.Field>
+            <Form.Field>
+              <label>Password</label>
+              <input placeholder="Password" />
+            </Form.Field>
+            <Form.Field>
+              <label>Confirm Password</label>
+              <input placeholder="Confirm Password" />
             </Form.Field>
             <div className="text-center">
               <Button color="black" type="submit" className="">
