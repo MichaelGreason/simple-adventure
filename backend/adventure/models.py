@@ -8,10 +8,15 @@ class User(AbstractUser):
     attack = models.IntegerField(default=0)
     defense = models.IntegerField(default=0)
     speed = models.IntegerField(default=0)
-    weapon = models.ManyToManyField(
-        to='Weapon', blank=True, related_name='user')
-    wins = models.IntegerField(default=0)
-    losses = models.IntegerField(default=0)
+    weapon = models.ForeignKey(
+        to='Weapon',
+        on_delete=models.CASCADE,
+        related_name='user',
+        blank=True,
+        null=True
+    )
+    kills = models.IntegerField(default=0)
+    deaths = models.IntegerField(default=0)
 
 
 class Enemy(models.Model):
@@ -20,8 +25,13 @@ class Enemy(models.Model):
     attack = models.IntegerField(default=0)
     defense = models.IntegerField(default=0)
     speed = models.IntegerField(default=0)
-    weapon = models.ManyToManyField(
-        to='Weapon', blank=True, related_name='enemy')
+    weapon = models.ForeignKey(
+        to='Weapon',
+        on_delete=models.CASCADE,
+        related_name='enemy',
+        blank=True,
+        null=True
+    )
 
     class Meta:
         verbose_name_plural = 'enemies'
@@ -30,3 +40,6 @@ class Enemy(models.Model):
 class Weapon(models.Model):
     name = models.CharField(default='weapon')
     damage = models.IntegerField(default=0)
+    attack = models.IntegerField(default=0)
+    defense = models.IntegerField(default=0)
+    speed = models.IntegerField(default=0)
