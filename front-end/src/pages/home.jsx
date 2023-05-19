@@ -24,8 +24,9 @@ export default function Home() {
           ></img>
           <div className="flex flex-col items-center justify-center">
             <p className="font-cursive ml-2 text-2xl">Name:</p>
-            <p className="font-cursive ml-2 text-2xl">Weapon:</p>
             <p className="font-cursive ml-2 text-2xl">HP:</p>
+            <p className="font-cursive ml-2 text-2xl">Weapon:</p>
+            <p className="font-cursive ml-2 text-2xl">Defense:</p>
             <p className="font-cursive ml-2 text-2xl">Speed:</p>
             <p className="font-cursive ml-2 text-2xl">Kills:</p>
             <p className="font-cursive ml-2 text-2xl">Deaths:</p>
