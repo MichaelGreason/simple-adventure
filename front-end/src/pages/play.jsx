@@ -9,6 +9,8 @@ export default function Play() {
   const [roll, setRoll] = useState();
   const navigate = useNavigate();
   const an = [11, 18];
+  const [userHP, setUserHP] = useState(10);
+  const [enemyHP, setEnemyHP] = useState(10);
 
   function rollDie() {
     setRoll(_.random(1, 20));
@@ -23,12 +25,13 @@ export default function Play() {
     <>
       <div className=" flex justify-center items-center flex-col h-screen">
         <div className="flex flex-col mb-10">
-          <div className="font-cursive text-xl">HP:</div>
+          <div className="font-cursive text-xl self-center">HP: {enemyHP}</div>
           <img
             src="/src/temp-img/hero1.png"
             alt="avatar"
             className="h-48 self-center"
           ></img>
+          <div className="font-cursive text-xl mt-2 self-center">Enemy</div>
         </div>
         <div className="flex items-center justify-center">
           <img
@@ -42,13 +45,14 @@ export default function Play() {
               : `You rolled a ${roll}`}{" "}
           </div>
         </div>
-        <div className="flex flex-col mb-10">
+        <div className="flex flex-col mt-10">
+          <div className="font-cursive text-xl mb-2 self-center">User</div>
           <img
             src="/src/temp-img/hero1.png"
             alt="avatar"
-            className="mt-10 h-48 self-center"
+            className="h-48 self-center"
           ></img>
-          <div className="font-cursive text-xl">HP:</div>
+          <div className="font-cursive text-xl self-center">HP: {userHP}</div>
         </div>
       </div>
       <div className="absolute bottom-5 left-5">
