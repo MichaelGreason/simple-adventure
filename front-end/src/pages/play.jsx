@@ -48,10 +48,12 @@ export default function Play() {
             className="w-1/5 cursor-pointer"
             src="/src/temp-img/20sideddie.png"
           />
-          <div className="text-xl font-cursive">
-            {an.includes(roll)
-              ? `You rolled an ${roll} `
-              : `You rolled a ${roll} `}{" "}
+          <div className="text-2xl font-cursive ml-2">
+            {roll > 0
+              ? an.includes(roll)
+                ? `You rolled an ${roll} `
+                : `You rolled a ${roll} `
+              : "Roll!"}
           </div>
         </div>
         <div className="flex mt-10">
