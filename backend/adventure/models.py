@@ -36,6 +36,9 @@ class Enemy(models.Model):
     class Meta:
         verbose_name_plural = 'enemies'
 
+    def __str__(self):
+        return self.name
+
 
 class Weapon(models.Model):
     name = models.CharField(default='weapon')
