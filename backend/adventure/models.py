@@ -18,6 +18,9 @@ class User(AbstractUser):
     kills = models.IntegerField(default=0)
     deaths = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.name
+
 
 class Enemy(models.Model):
     name = models.CharField(default='enemy')
@@ -46,3 +49,6 @@ class Weapon(models.Model):
     attack = models.IntegerField(default=0)
     defense = models.IntegerField(default=0)
     speed = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
