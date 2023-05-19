@@ -14,7 +14,7 @@ export default function Play() {
 
   return (
     <>
-      <div className=" flex justify-center items-center h-screen">
+      <div className=" flex justify-center items-center h-screen flex-col">
         <img
           onClick={rollDie}
           className="w-1/5 cursor-pointer"
