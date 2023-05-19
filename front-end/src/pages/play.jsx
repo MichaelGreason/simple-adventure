@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function Play() {
   const [roll, setRoll] = useState();
   const navigate = useNavigate();
+  const an = [11, 18];
 
   function rollDie() {
     setRoll(_.random(1, 20));
@@ -36,7 +37,9 @@ export default function Play() {
             src="src/temp-img/pngwing.com.png"
           />
           <div className="text-xl font-cursive">
-            {roll === 11 ? `You rolled an ${roll}` : `You rolled a ${roll}`}{" "}
+            {an.includes(roll)
+              ? `You rolled an ${roll}`
+              : `You rolled a ${roll}`}{" "}
           </div>
         </div>
         <div className="flex flex-col mb-10">
