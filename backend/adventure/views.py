@@ -2,7 +2,7 @@
 import random
 from rest_framework import generics
 from .models import User, Enemy, Weapon
-from .serializers import UserSerializer, EnemySerializer
+from .serializers import UserSerializer, EnemySerializer, WeaponSerializer
 
 
 class UserProfile(generics.RetrieveUpdateDestroyAPIView):
