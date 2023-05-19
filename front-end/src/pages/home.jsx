@@ -13,8 +13,8 @@ export default function Home() {
 
   return (
     <>
-      <div style={{ textAlign: "center" }}>
-        <h1 className="title">Simple Adventure</h1>
+      <div className=" text-center mt-10">
+        <h1 className="title text-6xl">Simple Adventure</h1>
       </div>
       <div
         style={{
