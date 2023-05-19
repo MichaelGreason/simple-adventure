@@ -1,131 +1,43 @@
 import { useState } from "react";
 import React from "react";
+import { Button } from "semantic-ui-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-  let [count, setCount] = useState(0);
+  const navigate = useNavigate();
 
-  // function addCount() {
-  //   setCount((count += 1));
-  // }
-  // function subtractCount() {
-  //   setCount((count -= 1));
-  // }
+  function handlePlay() {
+    navigate("/play");
+  }
 
   return (
     <>
       <div className=" text-center mt-10">
         <h1 className="title text-6xl">Simple Adventure</h1>
       </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          marginLeft: "5rem",
-          marginTop: "5rem",
-        }}
-      >
-        <img
-          src="/src/temp-img/hero1.png"
-          alt="avatar"
-          className="avatar"
-          style={{
-            height: "10rem",
-
-            alignSelf: "center",
-          }}
-        ></img>
-        <div style={{ display: "flex", width: "50%" }}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyItems: "center",
-              alignItems: "center",
-              marginLeft: "20%",
-            }}
-          >
-            <p
-              className="text"
-              style={{
-                marginLeft: "2rem",
-              }}
-            >
-              Name:
-            </p>
-            <p
-              className="text"
-              style={{
-                marginLeft: "2rem",
-              }}
-            >
-              Weapon:
-            </p>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyItems: "center",
-              alignItems: "center",
-              marginLeft: "20%",
-            }}
-          >
-            <p
-              className="text"
-              style={{
-                marginLeft: "2rem",
-              }}
-            >
-              Wins:
-            </p>
-            <p
-              className="text"
-              style={{
-                marginLeft: "2rem",
-              }}
-            >
-              Losses:
-            </p>
+      <div className="flex items-center mx-5 mt-5">
+        <div className="flex flex-col w-1/2 m-auto mt-10">
+          <img
+            src="/src/temp-img/hero1.png"
+            alt="avatar"
+            className="mb-5 h-48 self-center"
+          ></img>
+          <div className="flex flex-col items-center justify-center">
+            <p className="font-cursive ml-2 text-2xl">Name:</p>
+            <p className="font-cursive ml-2 text-2xl">Weapon:</p>
+            <p className="font-cursive ml-2 text-2xl">HP:</p>
+            <p className="font-cursive ml-2 text-2xl">Speed:</p>
+            <p className="font-cursive ml-2 text-2xl">Kills:</p>
+            <p className="font-cursive ml-2 text-2xl">Deaths:</p>
+            <p className="font-cursive ml-2 text-2xl">Highest Streak:</p>
           </div>
         </div>
       </div>
-      <div
-        style={{
-          borderRadius: "",
-          position: "absolute",
-          bottom: "2rem",
-          right: "2rem",
-        }}
-      >
-        <button
-          style={{
-            height: "5rem",
-            width: "5rem",
-            borderRadius: "50%",
-            fontFamily: "'Darumadrop One'",
-            fontSize: "1rem",
-          }}
-        >
-          PLAY
-        </button>
+      <div className="mt-10 text-center">
+        <Button className="h-20" color="red" circular onClick={handlePlay}>
+          <span className="font-cursive">PLAY</span>
+        </Button>
       </div>
-      {/* <div
-        style={{
-          textAlign: "center",
-          display: "flex",
-          justifyContent: "space-evenly",
-        }}
-      >
-        <button style={{ width: "10rem", height: "10rem" }} onClick={addCount}>
-          Add
-        </button>
-        <button
-          style={{ width: "10rem", height: "10rem" }}
-          onClick={subtractCount}
-        >
-          Subtract
-        </button>
-      </div> */}
     </>
   );
 }
