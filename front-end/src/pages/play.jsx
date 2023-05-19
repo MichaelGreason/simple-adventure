@@ -2,11 +2,14 @@ import React from "react";
 import axios from "axios";
 import { Button } from "semantic-ui-react";
 import _ from "lodash";
+import { useState } from "react";
 
 export default function Play() {
+  const [roll, setRoll] = useState();
+
   function rollDie() {
-    const result = _.random(1, 20);
-    console.log(result);
+    setRoll(_.random(1, 20));
+    console.log(roll);
   }
 
   return (
@@ -17,7 +20,7 @@ export default function Play() {
           className="w-1/5 cursor-pointer"
           src="src/temp-img/pngwing.com.png"
         />
-        You rolled a
+        <div className="text-xl">You rolled a {roll}</div>
       </div>
     </>
   );
