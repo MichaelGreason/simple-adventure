@@ -11,6 +11,8 @@ export default function Play() {
   const an = [11, 18];
   const [userHP, setUserHP] = useState(10);
   const [enemyHP, setEnemyHP] = useState(10);
+  const [userDefense, setUserDefense] = useState(10);
+  const [enemyDefense, setEnemyDefense] = useState(10);
   const [userSpeed, setUserSpeed] = useState(5);
   const [enemySpeed, setEnemySpeed] = useState(5);
 
@@ -40,6 +42,9 @@ export default function Play() {
             <div className="font-cursive text-xl self-center">
               Speed: {enemySpeed}
             </div>
+            <div className="font-cursive text-xl self-center">
+              Defense: {enemyDefense}
+            </div>
           </div>
         </div>
         <div className="flex items-center justify-center">
@@ -48,10 +53,12 @@ export default function Play() {
             className="w-1/5 cursor-pointer"
             src="/src/temp-img/20sideddie.png"
           />
-          <div className="text-xl font-cursive">
-            {an.includes(roll)
-              ? `You rolled an ${roll} `
-              : `You rolled a ${roll} `}{" "}
+          <div className="text-2xl font-cursive ml-2">
+            {roll > 0
+              ? an.includes(roll)
+                ? `You rolled an ${roll} `
+                : `You rolled a ${roll} `
+              : "Roll!"}
           </div>
         </div>
         <div className="flex mt-10">
@@ -65,6 +72,9 @@ export default function Play() {
             <div className="font-cursive text-xl self-center">HP: {userHP}</div>
             <div className="font-cursive text-xl self-center">
               Speed: {userSpeed}
+            </div>
+            <div className="font-cursive text-xl self-center">
+              Defense: {userDefense}
             </div>
           </div>
         </div>
