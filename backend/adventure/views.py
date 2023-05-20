@@ -1,5 +1,6 @@
 # from django.shortcuts import render
 import random
+from django.db.models import Q
 from rest_framework import generics
 from .models import User, Enemy, Weapon
 from .serializers import UserSerializer, EnemySerializer, WeaponSerializer
@@ -15,6 +16,11 @@ class UserProfile(generics.RetrieveUpdateDestroyAPIView):
 class Enemies(generics.ListAPIView):
     serializer_class = EnemySerializer
     queryset = Enemy.objects.all()
+
+
+class BasicWeapons(generics.ListAPIView):
+    serializer_class = WeaponSerializer
+    queryset = Weapon.objects.filter(Q(name__contains='Basic'))
 
 
 def roll_d20():
