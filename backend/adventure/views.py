@@ -14,6 +14,7 @@ class UserProfile(generics.RetrieveUpdateDestroyAPIView):
 
 class Enemies(generics.ListAPIView):
     serializer_class = EnemySerializer
+    queryset = Enemy.objects.all()
 
 
 def roll_d20():
