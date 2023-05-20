@@ -28,4 +28,5 @@ you have to put auth before all of these
 
 * /profile/ (for profile update/edit/destroy)
 * /enemies/ (list all enemies)
+* /weapons/ (list all weapons)
 * /weapons/basic/ (list all basic weapons)
