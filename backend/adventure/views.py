@@ -12,6 +12,10 @@ class UserProfile(generics.RetrieveUpdateDestroyAPIView):
         return self.request.user
 
 
+class Enemies(generics.ListAPIView):
+    serializer_class = EnemySerializer
+
+
 def roll_d20():
     roll = random.randint(1, 20)
     return roll

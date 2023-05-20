@@ -24,4 +24,5 @@ urlpatterns = [
     path('auth/', include('djoser.urls.authtoken')),
 
     path('profile', views.UserProfile.as_view()),
+    path('enemies', views.Enemies.as_view()),
 ]
