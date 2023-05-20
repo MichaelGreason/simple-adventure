@@ -18,6 +18,11 @@ class Enemies(generics.ListAPIView):
     queryset = Enemy.objects.all()
 
 
+class Weapons(generics.ListAPIView):
+    serializer_class = WeaponSerializer
+    queryset = Weapon.objects.all()
+
+
 class BasicWeapons(generics.ListAPIView):
     serializer_class = WeaponSerializer
     queryset = Weapon.objects.filter(Q(name__contains='Basic'))
