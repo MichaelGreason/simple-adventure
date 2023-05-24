@@ -6,6 +6,7 @@ import SignUp from "./pages/sign-up";
 import "semantic-ui-css/semantic.min.css";
 import SignIn from "./pages/sign-in";
 import Play from "./pages/play";
+import CreatePlayer from "./pages/create-player";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/play" element={<Play />} />
+        <Route path="/create-player" element={<CreatePlayer />} />
       </Routes>
     </>
   );
