@@ -7,32 +7,48 @@ export default function CreatePlayer() {
   const [attack, setAttack] = useState(0);
   const [defense, setDefense] = useState(0);
   const [speed, setSpeed] = useState(0);
-  const pointsSpent = attack + defense + speed;
   const [pointsLeft, setPointsLeft] = useState(10);
 
   function handleAttackAdd() {
-    setAttack((prevAttack) => prevAttack + 1);
-    setPointsLeft((prevPoints) => prevPoints - 1);
+    if (pointsLeft > 0) {
+      setAttack((prevAttack) => prevAttack + 1);
+      setPointsLeft((prevPoints) => prevPoints - 1);
+    }
   }
+
   function handleAttackSubtract() {
-    setAttack((prevAttack) => prevAttack - 1);
-    setPointsLeft((prevPoints) => prevPoints + 1);
+    if (attack > 0) {
+      setAttack((prevAttack) => prevAttack - 1);
+      setPointsLeft((prevPoints) => prevPoints + 1);
+    }
   }
+
   function handleDefenseAdd() {
-    setDefense((prevDef) => prevDef + 1);
-    setPointsLeft((prevPoints) => prevPoints - 1);
+    if (pointsLeft > 0) {
+      setDefense((prevDef) => prevDef + 1);
+      setPointsLeft((prevPoints) => prevPoints - 1);
+    }
   }
+
   function handleDefenseSubtract() {
-    setDefense((prevDef) => prevDef - 1);
-    setPointsLeft((prevPoints) => prevPoints + 1);
+    if (defense > 0) {
+      setDefense((prevDef) => prevDef - 1);
+      setPointsLeft((prevPoints) => prevPoints + 1);
+    }
   }
+
   function handleSpeedAdd() {
-    setSpeed((prevSpeed) => prevSpeed + 1);
-    setPointsLeft((prevPoints) => prevPoints - 1);
+    if (pointsLeft > 0) {
+      setSpeed((prevSpeed) => prevSpeed + 1);
+      setPointsLeft((prevPoints) => prevPoints - 1);
+    }
   }
+
   function handleSpeedSubtract() {
-    setSpeed((prevSpeed) => prevSpeed - 1);
-    setPointsLeft((prevPoints) => prevPoints + 1);
+    if (speed > 0) {
+      setSpeed((prevSpeed) => prevSpeed - 1);
+      setPointsLeft((prevPoints) => prevPoints + 1);
+    }
   }
 
   return (
@@ -47,10 +63,18 @@ export default function CreatePlayer() {
             Attack: {attack}
             <span className="ml-5">
               <Button.Group>
-                <Button compact onClick={handleAttackAdd}>
+                <Button
+                  compact
+                  onClick={handleAttackAdd}
+                  disabled={pointsLeft === 0}
+                >
                   +1
                 </Button>
-                <Button compact onClick={handleAttackSubtract}>
+                <Button
+                  compact
+                  onClick={handleAttackSubtract}
+                  disabled={attack === 0}
+                >
                   -1
                 </Button>
               </Button.Group>
@@ -60,10 +84,18 @@ export default function CreatePlayer() {
             Defense: {defense}
             <span className="ml-5">
               <Button.Group>
-                <Button compact onClick={handleDefenseAdd}>
+                <Button
+                  compact
+                  onClick={handleDefenseAdd}
+                  disabled={pointsLeft === 0}
+                >
                   +1
                 </Button>
-                <Button compact onClick={handleDefenseSubtract}>
+                <Button
+                  compact
+                  onClick={handleDefenseSubtract}
+                  disabled={defense === 0}
+                >
                   -1
                 </Button>
               </Button.Group>
@@ -73,10 +105,18 @@ export default function CreatePlayer() {
             Speed: {speed}
             <span className="ml-5">
               <Button.Group>
-                <Button compact onClick={handleSpeedAdd}>
+                <Button
+                  compact
+                  onClick={handleSpeedAdd}
+                  disabled={pointsLeft === 0}
+                >
                   +1
                 </Button>
-                <Button compact onClick={handleSpeedSubtract}>
+                <Button
+                  compact
+                  onClick={handleSpeedSubtract}
+                  disabled={speed === 0}
+                >
                   -1
                 </Button>
               </Button.Group>
