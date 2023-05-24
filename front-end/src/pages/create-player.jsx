@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Button, Form } from "semantic-ui-react";
 import axios from "axios";
+import { Box, Modal } from "@mui/material";
 
 export default function CreatePlayer() {
   const [name, setName] = useState("");
@@ -10,6 +11,13 @@ export default function CreatePlayer() {
   const [defense, setDefense] = useState(0);
   const [speed, setSpeed] = useState(0);
   const [pointsLeft, setPointsLeft] = useState(10);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [basicSword, setBasicSword] = useState();
+  const [basicDagger, setBasicDagger] = useState();
+  const [basicBattleAxe, setBasicBattleAxe] = useState();
+  const [basicBow, setBasicBow] = useState();
 
   useEffect(() => {
     axios
@@ -18,11 +26,17 @@ export default function CreatePlayer() {
       })
       .then((response) => {
         console.log(response);
+        setBasicSword(response.data[0]);
+        setBasicDagger(response.data[1]);
+        setBasicBattleAxe(response.data[2]);
+        setBasicBow(response.data[3]);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
+
+  console.log(basicSword);
 
   function handleAttackAdd() {
     if (pointsLeft > 0) {
@@ -65,7 +79,6 @@ export default function CreatePlayer() {
       setPointsLeft((prevPoints) => prevPoints + 1);
     }
   }
-  console.log(name);
 
   return (
     <>
@@ -143,7 +156,28 @@ export default function CreatePlayer() {
               </Button.Group>
             </span>
           </div>
-          <div>Select Weapon</div>
+          <div>
+            <div>Weapon: </div>
+            <Button onClick={handleOpen} size="large">
+              <span className=" font-cursive">Select Weapon</span>
+            </Button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box className="absolute top-1/3 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black">
+                <div
+                  id="modal-modal-description"
+                  className=" text-center font-cursive text-xl"
+                >
+                  <div>Basic Sword</div>
+                  <img src="src/temp-img/basicsword.png" />
+                </div>
+              </Box>
+            </Modal>
+          </div>
         </div>
       </div>
     </>
