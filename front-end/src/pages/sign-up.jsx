@@ -1,7 +1,13 @@
 import React from "react";
 import { Button, Form } from "semantic-ui-react";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
+  function handleSubmit() {
+    navigate("/create-player");
+  }
   return (
     <>
       <div className="">
@@ -46,7 +52,9 @@ export default function SignUp() {
             </Form.Field>
             <div className="text-center">
               <Button color="black" type="submit" className="">
-                <span className="font-cursive text-lg">Submit</span>
+                <span className="font-cursive text-lg" onClick={handleSubmit}>
+                  Submit
+                </span>
               </Button>
             </div>
           </Form>

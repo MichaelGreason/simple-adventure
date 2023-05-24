@@ -278,6 +278,11 @@ export default function CreatePlayer() {
                 </Box>
               </Modal>
             </div>
+            <div className=" flex justify-center mt-20">
+              <Button>
+                <span className=" font-cursive">PLAY GAME</span>
+              </Button>
+            </div>
           </div>
         </div>
       </>
