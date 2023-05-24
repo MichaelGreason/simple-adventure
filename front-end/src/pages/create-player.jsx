@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { Button } from "semantic-ui-react";
+import { Button, Form } from "semantic-ui-react";
 
 export default function CreatePlayer() {
+  const [name, setName] = useState("");
   const [hp, setHP] = useState(10);
   const [attack, setAttack] = useState(0);
   const [defense, setDefense] = useState(0);
@@ -50,6 +51,7 @@ export default function CreatePlayer() {
       setPointsLeft((prevPoints) => prevPoints + 1);
     }
   }
+  console.log(name);
 
   return (
     <>
@@ -57,7 +59,12 @@ export default function CreatePlayer() {
       <div className=" text-center font-cursive">
         <p className="text-5xl">Create Player</p>
         <div className="mt-4 font-cursive text-3xl">
-          <div>Name: </div>
+          <div className="flex justify-center">
+            Player name:
+            <Form className="ml-5 w-2/6">
+              <input placeholder="" onChange={(e) => setName(e.target.value)} />
+            </Form>
+          </div>
           <div>HP: {hp}</div>
           <div>
             Attack: {attack}
