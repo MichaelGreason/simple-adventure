@@ -1,6 +1,7 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Form } from "semantic-ui-react";
+import axios from "axios";
 
 export default function CreatePlayer() {
   const [name, setName] = useState("");
@@ -9,6 +10,19 @@ export default function CreatePlayer() {
   const [defense, setDefense] = useState(0);
   const [speed, setSpeed] = useState(0);
   const [pointsLeft, setPointsLeft] = useState(10);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/weapons/basic", {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   function handleAttackAdd() {
     if (pointsLeft > 0) {
