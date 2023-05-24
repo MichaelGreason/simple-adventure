@@ -7,6 +7,7 @@ import "semantic-ui-css/semantic.min.css";
 import SignIn from "./pages/sign-in";
 import Play from "./pages/play";
 import CreatePlayer from "./pages/create-player";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
   return (
