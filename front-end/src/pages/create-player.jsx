@@ -211,10 +211,14 @@ export default function CreatePlayer() {
                     />
                   </span>
                 )}
-                <div>Attack: +{selectedWeapon.attack}</div>
-                <div>Damge: {selectedWeapon.damage}</div>
-                <div>Defense: {selectedWeapon.defense}</div>
-                <div>Speed: {selectedWeapon.speed}</div>
+                {selectedWeapon && (
+                  <div>
+                    <div>Attack: +{selectedWeapon.attack}</div>
+                    <div>Damage: {selectedWeapon.damage}</div>
+                    <div>Defense: {selectedWeapon.defense}</div>
+                    <div>Speed: {selectedWeapon.speed}</div>
+                  </div>
+                )}
               </div>
               <Modal
                 open={open}
@@ -273,6 +277,11 @@ export default function CreatePlayer() {
                   </div>
                 </Box>
               </Modal>
+            </div>
+            <div className=" flex justify-center mt-20">
+              <Button>
+                <span className=" font-cursive">PLAY GAME</span>
+              </Button>
             </div>
           </div>
         </div>
