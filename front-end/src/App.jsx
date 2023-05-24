@@ -10,6 +10,8 @@ import CreatePlayer from "./pages/create-player";
 import useLocalStorageState from "use-local-storage-state";
 
 function App() {
+  const [token, setToken] = useLocalStorageState("Token", null);
+
   return (
     <>
       <Routes>
