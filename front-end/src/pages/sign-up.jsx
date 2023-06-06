@@ -8,6 +8,7 @@ export default function SignUp() {
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [token, setToken] = useState(null);
 
@@ -47,16 +48,19 @@ export default function SignUp() {
         <div className="flex justify-center h-screen">
           <Form className="font-cursive mx-5 mt-10 w-2/5 ">
             {/* <Form.Field>
-              <label>Email</label>
-              <input placeholder="Email" />
-            </Form.Field>
-            <Form.Field>
               <label>First Name</label>
               <input placeholder="First Name" />
-            </Form.Field>
-            <Form.Field>
+              </Form.Field>
+              <Form.Field>
               <label>Last Name</label>
               <input placeholder="Last Name" />
+            </Form.Field> */}
+            {/* <Form.Field>
+              <label>Email</label>
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+              />
             </Form.Field> */}
             <Form.Field>
               <label>Username</label>
