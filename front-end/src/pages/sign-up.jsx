@@ -14,7 +14,7 @@ export default function SignUp() {
 
   function handleSubmit() {
     axios
-      .post("http://127.0.0.1:8000/auth/users", {
+      .post("http://127.0.0.1:8000/auth/users/", {
         headers: { "Content-Type": "application/json" },
         username: username,
         password: password,
