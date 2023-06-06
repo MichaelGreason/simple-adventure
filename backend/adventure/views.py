@@ -38,8 +38,11 @@ def determine_initiative():
     enemy_speed = Enemy.speed + Enemy.weapon.speed + roll_d20()
 
     if player_speed > enemy_speed:
+        # player attacks first
         pass
     elif player_speed < enemy_speed:
+        # enemy attacks first
         pass
     else:
+        # roll again
         determine_initiative()
