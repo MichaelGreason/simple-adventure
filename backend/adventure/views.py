@@ -1,7 +1,6 @@
 # from django.shortcuts import render
 import random
 from django.db.models import Q
-from djoser.views import UserCreateView
 from rest_framework import generics
 from .models import User, Enemy, Weapon
 from .serializers import UserSerializer, EnemySerializer, WeaponSerializer
