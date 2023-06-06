@@ -46,3 +46,11 @@ def determine_initiative():
     else:
         # roll again
         determine_initiative()
+
+
+def player_attack():
+    pass
+
+
+def enemy_attack():
+    pass
