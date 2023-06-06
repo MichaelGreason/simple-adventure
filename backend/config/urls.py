@@ -22,7 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
-    path('auth/users/', CustomUserCreateView.as_view(), name='user-create'),
 
     path('profile', views.UserProfile.as_view()),
     path('enemies', views.Enemies.as_view()),
