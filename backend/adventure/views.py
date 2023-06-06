@@ -44,4 +44,5 @@ def determine_initiative():
         # enemy attacks first
         pass
     else:
+        # roll again
         determine_initiative()
