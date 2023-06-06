@@ -4,11 +4,7 @@ from django.db.models import Q
 from djoser.views import UserCreateView
 from rest_framework import generics
 from .models import User, Enemy, Weapon
-from .serializers import CustomUserCreateSerializer, UserSerializer, EnemySerializer, WeaponSerializer
-
-
-class CustomUserCreateView(UserCreateView):
-    serializer_class = CustomUserCreateSerializer
+from .serializers import UserSerializer, EnemySerializer, WeaponSerializer
 
 
 class UserProfile(generics.RetrieveUpdateDestroyAPIView):
