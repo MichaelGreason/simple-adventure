@@ -49,7 +49,10 @@ def determine_initiative():
 
 
 def player_attack():
-    pass
+    player_attack = User.attack + User.weapon.attack + roll_d20()
+    enemy_defense = Enemy.defense + Enemy.weapon.defense
+    if player_attack > enemy_defense:
+        Enemy.hit_points -= User.weapon.damage
 
 
 def enemy_attack():
