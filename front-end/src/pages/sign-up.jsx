@@ -10,7 +10,7 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState("");
 
   function handleSubmit() {
     axios
@@ -21,7 +21,26 @@ export default function SignUp() {
       })
       .then((response) => {
         console.log(response);
+        createPlayer();
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error.response);
+      });
+    function createPlayer() {}
+    axios
+      .post(
+        "http://127.0.0.1:8000/auth/token/login/",
+        {
+          username: username,
+          password: password,
+        },
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then((response) => {
+        console.log(response);
         setToken(response.data.auth_token);
+        navigate("/create-player");
       })
       .catch((error) => {
         console.error(error);

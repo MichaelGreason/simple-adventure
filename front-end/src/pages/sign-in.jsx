@@ -8,8 +8,8 @@ export default function SignIn() {
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState(null);
   const [error, setError] = useState("");
+  const [token, setToken] = useState();
 
   function handleLogin() {
     axios
@@ -23,8 +23,8 @@ export default function SignIn() {
       )
       .then((response) => {
         console.log(response);
-        // setToken(response.data.auth_token);
-        // navigate("/");
+        setToken(response.data.auth_token);
+        navigate("/");
       })
       .catch((error) => {
         console.error(error);
