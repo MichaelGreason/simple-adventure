@@ -56,4 +56,7 @@ def player_attack():
 
 
 def enemy_attack():
-    pass
+    enemy_attack = Enemy.attack + Enemy.weapon.attack + roll_d20()
+    player_defense = User.defense + User.weapon.defense
+    if enemy_attack > player_defense:
+        User.hit_points -= Enemy.weapon.damage
