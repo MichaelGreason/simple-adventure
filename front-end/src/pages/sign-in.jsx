@@ -24,6 +24,7 @@ export default function SignIn() {
       .then((response) => {
         console.log(response);
         setToken(response.data.auth_token);
+        localStorage.setItem("Token", token);
         navigate("/");
       })
       .catch((error) => {
