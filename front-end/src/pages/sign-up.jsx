@@ -52,6 +52,10 @@ export default function SignUp({ setToken }) {
     }
   }
 
+  function handleNavSignIn() {
+    navigate("/sign-in");
+  }
+
   return (
     <>
       <div className="">
@@ -107,10 +111,20 @@ export default function SignUp({ setToken }) {
               <Button
                 color="black"
                 type="submit"
-                className=""
+                className="w-1/2"
                 onClick={handleSubmit}
               >
                 <span className="font-cursive text-lg">Submit</span>
+              </Button>
+            </div>
+            <div className="text-center mt-4">
+              <Button
+                color="black"
+                type="submit"
+                className="w-1/2"
+                onClick={handleNavSignIn}
+              >
+                <span className="font-cursive text-lg">Sign in</span>
               </Button>
             </div>
           </Form>

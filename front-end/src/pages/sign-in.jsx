@@ -32,6 +32,10 @@ export default function SignIn({ setToken }) {
       });
   }
 
+  function handleNavSignUp() {
+    navigate("/sign-up");
+  }
+
   return (
     <>
       <div className="mt-20 ">
@@ -58,10 +62,20 @@ export default function SignIn({ setToken }) {
               <Button
                 color="black"
                 type="submit"
-                className=""
+                className="w-1/2"
                 onClick={handleLogin}
               >
                 <span className="font-cursive text-lg">Adventure</span>
+              </Button>
+            </div>
+            <div className="text-center mt-3">
+              <Button
+                color="black"
+                type="submit"
+                className="w-1/2"
+                onClick={handleNavSignUp}
+              >
+                <span className="font-cursive text-lg">Sign Up</span>
               </Button>
             </div>
           </Form>
