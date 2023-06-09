@@ -6,7 +6,18 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = '__all__'
+        fields = (
+            'username',
+            'name',
+            'hit_points',
+            'attack',
+            'defense',
+            'speed',
+            'weapon',
+            'skill_points',
+            'kills',
+            'deaths',
+        )
 
 
 class EnemySerializer(serializers.ModelSerializer):
