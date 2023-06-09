@@ -3,7 +3,6 @@ from django.db import models
 
 
 class User(AbstractUser):
-    name = models.CharField(default='player')
     hit_points = models.IntegerField(default=0)
     attack = models.IntegerField(default=0)
     defense = models.IntegerField(default=0)
@@ -19,7 +18,7 @@ class User(AbstractUser):
     deaths = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 class Enemy(models.Model):

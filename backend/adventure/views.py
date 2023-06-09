@@ -33,7 +33,27 @@ def roll_d20():
     return roll
 
 
-def determine_initiative():
+def player_attack(request, enemy):
+    player = request.user
+    player_weapon = player.weapon
+    enemy_weapon = enemy.weapon
+    if player_weapon:
+        player_attack = player.attack + player_weapon.attack + roll_d20()
+        enemy_defense = enemy.defense + enemy_weapon.defense
+        if player_attack > enemy_defense:
+            enemy.hit_points -= player_weapon.damage
+
+
+def enemy_attack(user, enemy):
+    weapon = enemy.weapon
+    if weapon:
+        enemy_attack = Enemy.attack + Enemy.weapon.attack + roll_d20()
+        player_defense = User.defense + User.weapon.defense
+        if enemy_attack > player_defense:
+            User.hit_points -= Enemy.weapon.damage
+
+
+def determine_initiative(user, enemy):
     player_speed = User.speed + User.weapon.speed + roll_d20()
     enemy_speed = Enemy.speed + Enemy.weapon.speed + roll_d20()
 

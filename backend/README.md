@@ -1,5 +1,7 @@
 ## Djoser Endpoints
 
+https://djoser.readthedocs.io/
+
 you have to put auth before all of these
 
 * /users/
