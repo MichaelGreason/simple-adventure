@@ -110,9 +110,11 @@ export default function CreatePlayer() {
   console.log(defense);
   console.log(speed);
   console.log(selectedWeapon);
+  console.log(hp);
 
   function handlePlayGame() {
     const data = {
+      hit_points: hp,
       name: name,
       attack: attack,
       defense: defense,
@@ -268,8 +270,9 @@ export default function CreatePlayer() {
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
+                className=" overflow-auto mb-10"
               >
-                <Box className="absolute top-1/4 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black overflow-auto max-h-96">
+                <Box className="absolute top-1/4 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black overflow-auto max-w-screen-2xl">
                   <div
                     id="modal-modal-description"
                     className=" text-center font-cursive text-xl"
