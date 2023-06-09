@@ -213,7 +213,7 @@ export default function CreatePlayer() {
                 )}
                 {selectedWeapon && (
                   <div>
-                    <div>Attack: +{selectedWeapon.attack}</div>
+                    <div>Attack: {selectedWeapon.attack}</div>
                     <div>Damage: {selectedWeapon.damage}</div>
                     <div>Defense: {selectedWeapon.defense}</div>
                     <div>Speed: {selectedWeapon.speed}</div>
@@ -226,7 +226,7 @@ export default function CreatePlayer() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
-                <Box className="absolute top-1/3 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black">
+                <Box className="absolute top-1/4 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black">
                   <div
                     id="modal-modal-description"
                     className=" text-center font-cursive text-xl"
