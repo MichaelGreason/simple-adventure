@@ -14,14 +14,14 @@ export default function CreatePlayer() {
   const [defense, setDefense] = useState(0);
   const [speed, setSpeed] = useState(0);
   const [pointsLeft, setPointsLeft] = useState(10);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const [weapons, setWeapons] = useState([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 1;
   const [selectedWeapon, setSelectedWeapon] = useState("");
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(
     () => {
