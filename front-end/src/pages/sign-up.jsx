@@ -1,10 +1,12 @@
 import React from "react";
 import { Button, Form } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import TokenContext from "../context/AuthContext";
 
-export default function SignUp() {
+export default function SignUp({ setToken }) {
+  const token = useContext(TokenContext);
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");

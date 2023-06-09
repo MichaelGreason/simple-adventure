@@ -1,5 +1,6 @@
 import "./styles/App.css";
 import { Routes, Route } from "react-router-dom";
+import TokenContext from "./context/AuthContext";
 import Home from "./pages/home";
 import React from "react";
 import SignUp from "./pages/sign-up";
@@ -10,15 +11,28 @@ import CreatePlayer from "./pages/create-player";
 import useLocalStorageState from "use-local-storage-state";
 
 function App() {
+  const [token, setToken] = useLocalStorageState("token", null);
+
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/play" element={<Play />} />
-        <Route path="/create-player" element={<CreatePlayer />} />
-      </Routes>
+      <TokenContext.Provider value={token}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              token ? (
+                <Home setToken={setToken} />
+              ) : (
+                <SignIn setToken={setToken} />
+              )
+            }
+          />
+          <Route path="/sign-up" element={<SignUp setToken={setToken} />} />
+          <Route path="/sign-in" element={<SignIn setToken={setToken} />} />
+          <Route path="/play" element={<Play />} />
+          <Route path="/create-player" element={<CreatePlayer />} />
+        </Routes>
+      </TokenContext.Provider>
     </>
   );
 }
