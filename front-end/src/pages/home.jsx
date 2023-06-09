@@ -8,12 +8,14 @@ import axios from "axios";
 
 export default function Home({ setToken }) {
   const navigate = useNavigate();
+  const [name, setName] = useState();
+  const [hp, setHp] = useState();
   const [weapon, setWeapon] = useState();
   const [attack, setAttack] = useState();
   const [defense, setDefense] = useState();
   const [speed, setSpeed] = useState();
   const [kills, setKills] = useState();
-  const [deaths, Deaths] = useState();
+  const [deaths, setDeaths] = useState();
   const [streak, setStreak] = useState();
   const token = useContext(TokenContext);
 
@@ -27,6 +29,14 @@ export default function Home({ setToken }) {
       .then((response) => {
         // Handle successful response
         console.log(response.data);
+        setName(response.data.name);
+        setHp(response.data.hit_points);
+        setWeapon(response.data.weapon);
+        setAttack(response.data.attack);
+        setDefense(response.data.defense);
+        setSpeed(response.data.speed);
+        setKills(response.data.kills);
+        setDeaths(response.data.deaths);
       })
       .catch((error) => {
         // Handle error
@@ -74,15 +84,22 @@ export default function Home({ setToken }) {
             className="mb-5 h-48 self-center"
           ></img>
           <div className="flex flex-col items-center justify-center">
-            <p className="font-cursive ml-2 text-2xl">Name:</p>
-            <p className="font-cursive ml-2 text-2xl">HP:</p>
-            <p className="font-cursive ml-2 text-2xl">Weapon: </p>
+            <p className="font-cursive ml-2 text-2xl">Name: {name}</p>
+            <p className="font-cursive ml-2 text-2xl">HP: {hp}</p>
+            <p className="font-cursive ml-2 text-2xl">
+              Weapon: {weapon === 1 && "Basic Sword"}
+              {weapon === 2 && "Basic Dagger"}
+              {weapon === 3 && "Basic Battle Axe"}
+              {weapon === 4 && "Basic Bow"}
+            </p>
             <p className="font-cursive ml-2 text-2xl">Attack: {attack}</p>
             <p className="font-cursive ml-2 text-2xl">Defense: {defense}</p>
-            <p className="font-cursive ml-2 text-2xl">Speed:</p>
-            <p className="font-cursive ml-2 text-2xl">Kills:</p>
-            <p className="font-cursive ml-2 text-2xl">Deaths:</p>
-            <p className="font-cursive ml-2 text-2xl">Highest Streak:</p>
+            <p className="font-cursive ml-2 text-2xl">Speed: {speed}</p>
+            <p className="font-cursive ml-2 text-2xl">Kills: {kills}</p>
+            <p className="font-cursive ml-2 text-2xl">Deaths: {deaths}</p>
+            <p className="font-cursive ml-2 text-2xl">
+              Highest Streak: {streak}
+            </p>
           </div>
         </div>
       </div>
