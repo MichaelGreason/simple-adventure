@@ -23,7 +23,7 @@ function App() {
               token ? (
                 <Home setToken={setToken} />
               ) : (
-                <SignIn setToken={setToken} />
+                <SignUp setToken={setToken} />
               )
             }
           />
