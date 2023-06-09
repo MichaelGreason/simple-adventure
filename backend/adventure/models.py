@@ -18,7 +18,7 @@ class User(AbstractUser):
     deaths = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 class Enemy(models.Model):
