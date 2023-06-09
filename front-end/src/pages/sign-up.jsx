@@ -10,7 +10,6 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [token, setToken] = useState("");
 
   function handleSubmit() {
     axios
@@ -27,25 +26,28 @@ export default function SignUp() {
         console.error(error);
         setError(error.response);
       });
-    function createPlayer() {}
-    axios
-      .post(
-        "http://127.0.0.1:8000/auth/token/login/",
-        {
-          username: username,
-          password: password,
-        },
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then((response) => {
-        console.log(response);
-        setToken(response.data.auth_token);
-        navigate("/create-player");
-      })
-      .catch((error) => {
-        console.error(error);
-        setError(error.response);
-      });
+    function createPlayer() {
+      axios
+        .post(
+          "http://127.0.0.1:8000/auth/token/login/",
+          {
+            username: username,
+            password: password,
+          },
+          { headers: { "Content-Type": "application/json" } }
+        )
+        .then((response) => {
+          console.log(response);
+          const token = response.data.auth_token;
+          setToken(token);
+          localStorage.setItem("Token", token);
+          navigate("/create-player");
+        })
+        .catch((error) => {
+          console.error(error);
+          setError(error.response);
+        });
+    }
   }
 
   return (

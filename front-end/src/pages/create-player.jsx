@@ -14,32 +14,41 @@ export default function CreatePlayer() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  //   const [basicSword, setBasicSword] = useState();
-  //   const [basicDagger, setBasicDagger] = useState();
-  //   const [basicBattleAxe, setBasicBattleAxe] = useState();
-  //   const [basicBow, setBasicBow] = useState();
   const [weapons, setWeapons] = useState([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 1;
   const [selectedWeapon, setSelectedWeapon] = useState("");
 
-  useEffect(() => {
+  useEffect(
+    () => {
+      axios
+        .get("http://127.0.0.1:8000/weapons/basic", {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((response) => {
+          console.log(response);
+          setWeapons(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     axios
-      .get("http://127.0.0.1:8000/weapons/basic", {
-        headers: { "Content-Type": "application/json" },
+      .get("http://127.0.0.1:8000/auth/users/me/", {
+        headers: {
+          Authorization: `Token `,
+        },
       })
       .then((response) => {
-        console.log(response);
-        setWeapons(response.data);
-        // setBasicSword(response.data[0]);
-        // setBasicDagger(response.data[1]);
-        // setBasicBattleAxe(response.data[2]);
-        // setBasicBow(response.data[3]);
+        // Handle successful response
+        console.log(response.data);
       })
       .catch((error) => {
+        // Handle error
         console.error(error);
-      });
-  }, []);
+      }),
+    []
+  );
 
   function handleAttackAdd() {
     if (pointsLeft > 0) {

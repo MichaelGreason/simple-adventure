@@ -9,7 +9,7 @@ export default function SignIn() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [token, setToken] = useState();
+  const [token, setToken] = useState("");
 
   function handleLogin() {
     axios
@@ -24,7 +24,7 @@ export default function SignIn() {
       .then((response) => {
         console.log(response);
         setToken(response.data.auth_token);
-        localStorage.setItem("Token", token);
+        localStorage.setItem("Token", response.data.auth_token);
         navigate("/");
       })
       .catch((error) => {
