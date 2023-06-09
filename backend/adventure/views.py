@@ -33,21 +33,25 @@ def roll_d20():
     return roll
 
 
-def player_attack():
-    player_attack = User.attack + User.weapon.attack + roll_d20()
-    enemy_defense = Enemy.defense + Enemy.weapon.defense
-    if player_attack > enemy_defense:
-        Enemy.hit_points -= User.weapon.damage
+def player_attack(user, enemy):
+    weapon = user.weapon
+    if weapon:
+        player_attack = User.attack + User.weapon.attack + roll_d20()
+        enemy_defense = Enemy.defense + Enemy.weapon.defense
+        if player_attack > enemy_defense:
+            Enemy.hit_points -= User.weapon.damage
 
 
-def enemy_attack():
-    enemy_attack = Enemy.attack + Enemy.weapon.attack + roll_d20()
-    player_defense = User.defense + User.weapon.defense
-    if enemy_attack > player_defense:
-        User.hit_points -= Enemy.weapon.damage
+def enemy_attack(user, enemy):
+    weapon = enemy.weapon
+    if weapon:
+        enemy_attack = Enemy.attack + Enemy.weapon.attack + roll_d20()
+        player_defense = User.defense + User.weapon.defense
+        if enemy_attack > player_defense:
+            User.hit_points -= Enemy.weapon.damage
 
 
-def determine_initiative():
+def determine_initiative(user, enemy):
     player_speed = User.speed + User.weapon.speed + roll_d20()
     enemy_speed = Enemy.speed + Enemy.weapon.speed + roll_d20()
 
