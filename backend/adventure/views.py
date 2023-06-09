@@ -33,13 +33,15 @@ def roll_d20():
     return roll
 
 
-def player_attack(user, enemy):
-    weapon = user.weapon
-    if weapon:
-        player_attack = User.attack + User.weapon.attack + roll_d20()
-        enemy_defense = Enemy.defense + Enemy.weapon.defense
+def player_attack(request, enemy):
+    player = request.user
+    player_weapon = player.weapon
+    enemy_weapon = enemy.weapon
+    if player_weapon:
+        player_attack = player.attack + player_weapon.attack + roll_d20()
+        enemy_defense = enemy.defense + enemy_weapon.defense
         if player_attack > enemy_defense:
-            Enemy.hit_points -= User.weapon.damage
+            enemy.hit_points -= player_weapon.damage
 
 
 def enemy_attack(user, enemy):
