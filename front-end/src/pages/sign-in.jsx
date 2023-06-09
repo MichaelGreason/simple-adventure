@@ -69,6 +69,7 @@ export default function SignIn({ setToken }) {
               </Button>
             </div>
             <div className="text-center mt-3">
+              Not an adventurer yet?
               <Button
                 color="black"
                 type="submit"

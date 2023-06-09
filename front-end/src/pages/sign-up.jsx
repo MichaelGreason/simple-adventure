@@ -118,6 +118,7 @@ export default function SignUp({ setToken }) {
               </Button>
             </div>
             <div className="text-center mt-4">
+              Already have an account?
               <Button
                 color="black"
                 type="submit"
