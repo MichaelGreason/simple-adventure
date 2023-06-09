@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { Button, Form } from "semantic-ui-react";
 import axios from "axios";
 import { Box, Modal, Pagination } from "@mui/material";
+import PropTypes from "prop-types";
 
-export default function CreatePlayer() {
+export default function CreatePlayer({ token }) {
   const [name, setName] = useState("");
   const [hp, setHP] = useState(10);
   const [attack, setAttack] = useState(0);
@@ -14,32 +15,42 @@ export default function CreatePlayer() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  //   const [basicSword, setBasicSword] = useState();
-  //   const [basicDagger, setBasicDagger] = useState();
-  //   const [basicBattleAxe, setBasicBattleAxe] = useState();
-  //   const [basicBow, setBasicBow] = useState();
   const [weapons, setWeapons] = useState([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 1;
   const [selectedWeapon, setSelectedWeapon] = useState("");
 
-  useEffect(() => {
+  useEffect(
+    () => {
+      console.log("Token:", token);
+      axios
+        .get("http://127.0.0.1:8000/weapons/basic", {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((response) => {
+          console.log(response);
+          setWeapons(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     axios
-      .get("http://127.0.0.1:8000/weapons/basic", {
-        headers: { "Content-Type": "application/json" },
+      .get("http://127.0.0.1:8000/auth/users/me/", {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
       })
       .then((response) => {
-        console.log(response);
-        setWeapons(response.data);
-        // setBasicSword(response.data[0]);
-        // setBasicDagger(response.data[1]);
-        // setBasicBattleAxe(response.data[2]);
-        // setBasicBow(response.data[3]);
+        // Handle successful response
+        console.log(response.data);
       })
       .catch((error) => {
+        // Handle error
         console.error(error);
-      });
-  }, []);
+      }),
+    []
+  );
 
   function handleAttackAdd() {
     if (pointsLeft > 0) {
@@ -288,3 +299,7 @@ export default function CreatePlayer() {
       </>
     );
 }
+
+CreatePlayer.propTypes = {
+  token: PropTypes.string.isRequired,
+};
