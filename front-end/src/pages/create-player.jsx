@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 import { Button, Form } from "semantic-ui-react";
 import axios from "axios";
 import { Box, Modal, Pagination } from "@mui/material";
-import PropTypes from "prop-types";
 
-export default function CreatePlayer({ token }) {
+export default function CreatePlayer() {
   const [name, setName] = useState("");
   const [hp, setHP] = useState(10);
   const [attack, setAttack] = useState(0);
@@ -22,7 +21,6 @@ export default function CreatePlayer({ token }) {
 
   useEffect(
     () => {
-      console.log("Token:", token);
       axios
         .get("http://127.0.0.1:8000/weapons/basic", {
           headers: { "Content-Type": "application/json" },
@@ -38,7 +36,7 @@ export default function CreatePlayer({ token }) {
     axios
       .get("http://127.0.0.1:8000/auth/users/me/", {
         headers: {
-          Authorization: `Token ${token}`,
+          Authorization: `Token `,
         },
       })
       .then((response) => {
@@ -299,7 +297,3 @@ export default function CreatePlayer({ token }) {
       </>
     );
 }
-
-CreatePlayer.propTypes = {
-  token: PropTypes.string.isRequired,
-};

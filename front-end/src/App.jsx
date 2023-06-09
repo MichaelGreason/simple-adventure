@@ -13,11 +13,11 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={token ? <Home token={token} /> : <SignIn />} />
+        <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/play" element={<Play token={token} />} />
-        <Route path="/create-player" element={<CreatePlayer token={token} />} />
+        <Route path="/play" element={<Play />} />
+        <Route path="/create-player" element={<CreatePlayer />} />
       </Routes>
     </>
   );
