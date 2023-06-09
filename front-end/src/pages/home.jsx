@@ -113,7 +113,7 @@ export default function Home({ setToken }) {
                   {weapon === 4 && "Basic Bow"}
                 </span>
               </Button>
-              <Modal
+              {/* <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
@@ -125,8 +125,32 @@ export default function Home({ setToken }) {
                     id="modal-modal-description"
                     className=" text-center font-cursive text-xl"
                   ></div>
+                  {weapons &&
+                    weapons.map((weapon, index) => (
+                      <div key={index} className=" flex flex-col ">
+                        <span className="text-2xl underline">
+                          {weapon.name}
+                        </span>
+                        <span>Attack: {weapon.attack}</span>
+                        <span>Damage: {weapon.damage}</span>
+                        <span>Defense: {weapon.defense}</span>
+                        <span>Speed: {weapon.speed}</span>
+                        {weapon.name === "Basic Sword" && (
+                          <img src="src/temp-img/basicsword.png" />
+                        )}
+                        {weapon.name === "Basic Dagger" && (
+                          <img src="src/temp-img/basicdagger.png" />
+                        )}
+                        {weapon.name === "Basic Battle Axe" && (
+                          <img src="src/temp-img/basicbattleaxe.png" />
+                        )}
+                        {weapon.name === "Basic Bow" && (
+                          <img src="src/temp-img/basicbow.png" />
+                        )}
+                      </div>
+                    ))}
                 </Box>
-              </Modal>
+              </Modal> */}
             </p>
             <p className="font-cursive ml-2 text-2xl">Attack: {attack}</p>
             <p className="font-cursive ml-2 text-2xl">Defense: {defense}</p>
