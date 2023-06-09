@@ -1,16 +1,17 @@
 import React from "react";
 import { Button, Form } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import TokenContext from "../context/AuthContext";
 
-export default function SignUp() {
+export default function SignUp({ setToken }) {
+  const token = useContext(TokenContext);
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [token, setToken] = useState("");
 
   function handleSubmit() {
     axios
@@ -27,25 +28,32 @@ export default function SignUp() {
         console.error(error);
         setError(error.response);
       });
-    function createPlayer() {}
-    axios
-      .post(
-        "http://127.0.0.1:8000/auth/token/login/",
-        {
-          username: username,
-          password: password,
-        },
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then((response) => {
-        console.log(response);
-        setToken(response.data.auth_token);
-        navigate("/create-player");
-      })
-      .catch((error) => {
-        console.error(error);
-        setError(error.response);
-      });
+    function createPlayer() {
+      axios
+        .post(
+          "http://127.0.0.1:8000/auth/token/login/",
+          {
+            username: username,
+            password: password,
+          },
+          { headers: { "Content-Type": "application/json" } }
+        )
+        .then((response) => {
+          console.log(response);
+          const token = response.data.auth_token;
+          setToken(token);
+          localStorage.setItem("Token", token);
+          navigate("/create-player");
+        })
+        .catch((error) => {
+          console.error(error);
+          setError(error.response);
+        });
+    }
+  }
+
+  function handleNavSignIn() {
+    navigate("/sign-in");
   }
 
   return (
@@ -103,10 +111,21 @@ export default function SignUp() {
               <Button
                 color="black"
                 type="submit"
-                className=""
+                className="w-1/2"
                 onClick={handleSubmit}
               >
                 <span className="font-cursive text-lg">Submit</span>
+              </Button>
+            </div>
+            <div className="text-center mt-4">
+              Already have an account?
+              <Button
+                color="black"
+                type="submit"
+                className="w-1/2"
+                onClick={handleNavSignIn}
+              >
+                <span className="font-cursive text-lg">Sign in</span>
               </Button>
             </div>
           </Form>

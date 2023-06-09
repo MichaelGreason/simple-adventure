@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-export default function SignIn() {
+export default function SignIn({ setToken }) {
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [token, setToken] = useState();
 
   function handleLogin() {
     axios
@@ -24,13 +23,17 @@ export default function SignIn() {
       .then((response) => {
         console.log(response);
         setToken(response.data.auth_token);
-        localStorage.setItem("Token", token);
+        localStorage.setItem("Token", response.data.auth_token);
         navigate("/");
       })
       .catch((error) => {
         console.error(error);
         setError(error.response);
       });
+  }
+
+  function handleNavSignUp() {
+    navigate("/sign-up");
   }
 
   return (
@@ -59,10 +62,21 @@ export default function SignIn() {
               <Button
                 color="black"
                 type="submit"
-                className=""
+                className="w-1/2"
                 onClick={handleLogin}
               >
                 <span className="font-cursive text-lg">Adventure</span>
+              </Button>
+            </div>
+            <div className="text-center mt-3">
+              Not an adventurer yet?
+              <Button
+                color="black"
+                type="submit"
+                className="w-1/2"
+                onClick={handleNavSignUp}
+              >
+                <span className="font-cursive text-lg">Sign Up</span>
               </Button>
             </div>
           </Form>
