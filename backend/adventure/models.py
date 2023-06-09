@@ -3,6 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
+    name = models.Charfield(default='player')
     hit_points = models.IntegerField(default=0)
     attack = models.IntegerField(default=0)
     defense = models.IntegerField(default=0)
