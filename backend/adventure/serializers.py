@@ -3,6 +3,7 @@ from .models import User, Enemy, Weapon
 
 
 class UserSerializer(serializers.ModelSerializer):
+    weapon_name = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = User
@@ -14,6 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
             'defense',
             'speed',
             'weapon',
+            'weapon_name',
             'skill_points',
             'kills',
             'deaths',
