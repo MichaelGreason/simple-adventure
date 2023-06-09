@@ -4,6 +4,7 @@ import { Button, Form } from "semantic-ui-react";
 import axios from "axios";
 import { Box, Modal, Pagination } from "@mui/material";
 import TokenContext from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePlayer() {
   const token = useContext(TokenContext);
@@ -20,6 +21,7 @@ export default function CreatePlayer() {
   const [page, setPage] = useState(1);
   const itemsPerPage = 1;
   const [selectedWeapon, setSelectedWeapon] = useState("");
+  const navigate = useNavigate();
 
   useEffect(
     () => {
@@ -36,7 +38,7 @@ export default function CreatePlayer() {
         });
     },
     axios
-      .get("http://127.0.0.1:8000/auth/users/me/", {
+      .get("http://127.0.0.1:8000/profile", {
         headers: {
           Authorization: `Token ${token}`,
         },
@@ -101,6 +103,36 @@ export default function CreatePlayer() {
   function selectWeapon(weapon) {
     setSelectedWeapon(weapon);
     handleClose();
+  }
+
+  console.log(name);
+  console.log(attack);
+  console.log(defense);
+  console.log(speed);
+  console.log(selectedWeapon);
+
+  function handlePlayGame() {
+    const data = {
+      name: name,
+      attack: attack,
+      defense: defense,
+      speed: speed,
+      weapon: selectedWeapon.id,
+    };
+    axios
+      .patch("http://127.0.0.1:8000/profile", data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   if (weapons)
@@ -237,7 +269,7 @@ export default function CreatePlayer() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
-                <Box className="absolute top-1/4 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black overflow-auto max-h-fit">
+                <Box className="absolute top-1/4 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black overflow-auto max-h-96">
                   <div
                     id="modal-modal-description"
                     className=" text-center font-cursive text-xl"
@@ -290,7 +322,7 @@ export default function CreatePlayer() {
               </Modal>
             </div>
             <div className=" flex justify-center mt-20">
-              <Button>
+              <Button onClick={handlePlayGame}>
                 <span className=" font-cursive">PLAY GAME</span>
               </Button>
             </div>
