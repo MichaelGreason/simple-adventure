@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import React from "react";
 import { Button } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 import { Box, Modal } from "@mui/material";
+import TokenContext from "../context/AuthContext";
+import axios from "axios";
 
-export default function Home() {
+export default function Home({ setToken }) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -12,6 +14,9 @@ export default function Home() {
   const [weapon, setWeapon] = useState();
   const [attack, setAttack] = useState();
   const [defense, setDefense] = useState();
+  const token = useContext(TokenContext);
+
+  console.log("Token:", token);
 
   function handlePlay() {
     navigate("/play");
@@ -22,6 +27,28 @@ export default function Home() {
     setAttack("5");
     setDefense("5");
     setOpen(false);
+  }
+
+  function handleLogout() {
+    axios
+      .post(
+        "http://127.0.0.1:8000/auth/token/logout/",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+        }
+      )
+      .then(() => {
+        setToken(null);
+        localStorage.removeItem("Token");
+        navigate("/sign-in");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   return (
@@ -100,6 +127,16 @@ export default function Home() {
       <div className="mt-10 text-center">
         <Button className="h-20" color="black" circular onClick={handlePlay}>
           <span className="font-cursive">PLAY</span>
+        </Button>
+      </div>
+      <div className="mt-10 text-center">
+        <Button
+          className="h-20 w-20"
+          color="black"
+          circular
+          onClick={handleLogout}
+        >
+          <span className="font-cursive flex-wrap">Sign Out</span>
         </Button>
       </div>
     </>
