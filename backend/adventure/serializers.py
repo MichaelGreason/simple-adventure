@@ -33,4 +33,3 @@ class UserSerializer(serializers.ModelSerializer):
             'kills',
             'deaths',
         )
-        # fields = '__all__'

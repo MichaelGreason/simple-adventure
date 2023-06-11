@@ -8,7 +8,6 @@ from .serializers import UserSerializer, EnemySerializer, WeaponSerializer
 
 class UserProfile(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
-    # queryset = User.objects.all()
 
     def get_object(self):
         return self.request.user
