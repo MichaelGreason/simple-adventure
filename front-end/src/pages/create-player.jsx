@@ -1,23 +1,27 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Button, Form } from "semantic-ui-react";
 import axios from "axios";
 import { Box, Modal, Pagination } from "@mui/material";
+import TokenContext from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePlayer() {
+  const token = useContext(TokenContext);
   const [name, setName] = useState("");
   const [hp, setHP] = useState(10);
   const [attack, setAttack] = useState(0);
   const [defense, setDefense] = useState(0);
   const [speed, setSpeed] = useState(0);
   const [pointsLeft, setPointsLeft] = useState(10);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const [weapons, setWeapons] = useState([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 1;
   const [selectedWeapon, setSelectedWeapon] = useState("");
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(
     () => {
@@ -34,9 +38,9 @@ export default function CreatePlayer() {
         });
     },
     axios
-      .get("http://127.0.0.1:8000/auth/users/me/", {
+      .get("http://127.0.0.1:8000/profile", {
         headers: {
-          Authorization: `Token `,
+          Authorization: `Token ${token}`,
         },
       })
       .then((response) => {
@@ -101,6 +105,38 @@ export default function CreatePlayer() {
     handleClose();
   }
 
+  console.log(name);
+  console.log(attack);
+  console.log(defense);
+  console.log(speed);
+  console.log(selectedWeapon);
+  console.log(hp);
+
+  function handlePlayGame() {
+    const data = {
+      hit_points: hp,
+      name: name,
+      attack: attack,
+      defense: defense,
+      speed: speed,
+      weapon: selectedWeapon.id,
+    };
+    axios
+      .patch("http://127.0.0.1:8000/profile", data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   if (weapons)
     return (
       <>
@@ -124,17 +160,17 @@ export default function CreatePlayer() {
                 <Button.Group>
                   <Button
                     compact
-                    onClick={handleAttackAdd}
-                    disabled={pointsLeft === 0}
-                  >
-                    +1
-                  </Button>
-                  <Button
-                    compact
                     onClick={handleAttackSubtract}
                     disabled={attack === 0}
                   >
                     -1
+                  </Button>
+                  <Button
+                    compact
+                    onClick={handleAttackAdd}
+                    disabled={pointsLeft === 0}
+                  >
+                    +1
                   </Button>
                 </Button.Group>
               </span>
@@ -145,17 +181,17 @@ export default function CreatePlayer() {
                 <Button.Group>
                   <Button
                     compact
-                    onClick={handleDefenseAdd}
-                    disabled={pointsLeft === 0}
-                  >
-                    +1
-                  </Button>
-                  <Button
-                    compact
                     onClick={handleDefenseSubtract}
                     disabled={defense === 0}
                   >
                     -1
+                  </Button>
+                  <Button
+                    compact
+                    onClick={handleDefenseAdd}
+                    disabled={pointsLeft === 0}
+                  >
+                    +1
                   </Button>
                 </Button.Group>
               </span>
@@ -166,17 +202,17 @@ export default function CreatePlayer() {
                 <Button.Group>
                   <Button
                     compact
-                    onClick={handleSpeedAdd}
-                    disabled={pointsLeft === 0}
-                  >
-                    +1
-                  </Button>
-                  <Button
-                    compact
                     onClick={handleSpeedSubtract}
                     disabled={speed === 0}
                   >
                     -1
+                  </Button>
+                  <Button
+                    compact
+                    onClick={handleSpeedAdd}
+                    disabled={pointsLeft === 0}
+                  >
+                    +1
                   </Button>
                 </Button.Group>
               </span>
@@ -234,8 +270,9 @@ export default function CreatePlayer() {
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
+                className=" overflow-auto mb-10"
               >
-                <Box className="absolute top-1/4 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black">
+                <Box className="absolute top-1/4 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black overflow-auto max-w-screen-2xl">
                   <div
                     id="modal-modal-description"
                     className=" text-center font-cursive text-xl"
@@ -288,7 +325,7 @@ export default function CreatePlayer() {
               </Modal>
             </div>
             <div className=" flex justify-center mt-20">
-              <Button>
+              <Button onClick={handlePlayGame}>
                 <span className=" font-cursive">PLAY GAME</span>
               </Button>
             </div>

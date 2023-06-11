@@ -12,4 +12,6 @@ body {
     max-width: 75rem;
     margin:auto;
     background-color: rgb(206, 204, 204);
+    max-height: fit-content;
+    overflow: auto;
 }
