@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import React from "react";
 import { Button } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
-import { Box, Modal } from "@mui/material";
+import { Box, Modal, Tooltip } from "@mui/material";
 import TokenContext from "../context/AuthContext";
 import axios from "axios";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
@@ -138,15 +138,30 @@ export default function Home({ setToken }) {
                   </Box>
                 </Modal>
               </p>
-              <p className="font-cursive ml-2 text-2xl">
-                Attack: {attack} + {weapon.attack}
-              </p>
-              <p className="font-cursive ml-2 text-2xl">
-                Defense: {defense} + {weapon.defense}
-              </p>
-              <p className="font-cursive ml-2 text-2xl">
-                Speed: {speed} + {weapon.speed}
-              </p>
+              <Tooltip
+                title={`Player(${attack}) + Weapon(${weapon.attack})`}
+                placement="right"
+              >
+                <p className="font-cursive ml-2 text-2xl">
+                  Attack: {attack + weapon.attack}
+                </p>
+              </Tooltip>
+              <Tooltip
+                title={`Player(${defense}) + Weapon(${weapon.defense})`}
+                placement="right"
+              >
+                <p className="font-cursive ml-2 text-2xl">
+                  Defense: {defense + weapon.defense}
+                </p>
+              </Tooltip>
+              <Tooltip
+                title={`Player(${speed}) + Weapon(${weapon.speed})`}
+                placement="right"
+              >
+                <p className="font-cursive ml-2 text-2xl">
+                  Speed: {speed + weapon.speed}
+                </p>
+              </Tooltip>
               <p className="font-cursive ml-2 text-2xl">Kills: {kills}</p>
               <p className="font-cursive ml-2 text-2xl">Deaths: {deaths}</p>
               <p className="font-cursive ml-2 text-2xl">
