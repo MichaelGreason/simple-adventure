@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { Box, Modal } from "@mui/material";
 import TokenContext from "../context/AuthContext";
 import axios from "axios";
+import OpenInFullIcon from "@mui/icons-material/OpenInFull";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 export default function Home({ setToken }) {
   const navigate = useNavigate();
   const [name, setName] = useState();
   const [hp, setHp] = useState();
-  const [weapon, setWeapon] = useState();
+  const [weaponName, setWeaponName] = useState();
   const [attack, setAttack] = useState();
   const [defense, setDefense] = useState();
   const [speed, setSpeed] = useState();
@@ -22,21 +24,20 @@ export default function Home({ setToken }) {
   const token = useContext(TokenContext);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [weapon, setWeapon] = useState();
 
-  useEffect(
-    () => {
-      axios
-        .get("http://127.0.0.1:8000/weapons/basic", {
-          headers: { "Content-Type": "application/json" },
-        })
-        .then((response) => {
-          console.log(response);
-          setWeapons(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/weapons/basic", {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((response) => {
+        console.log(response);
+        setWeapons(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     axios
       .get("http://127.0.0.1:8000/profile", {
         headers: {
@@ -48,19 +49,19 @@ export default function Home({ setToken }) {
         console.log(response.data);
         setName(response.data.name);
         setHp(response.data.hit_points);
-        setWeapon(response.data.weapon);
+        setWeaponName(response.data.weapon.name);
         setAttack(response.data.attack);
         setDefense(response.data.defense);
         setSpeed(response.data.speed);
         setKills(response.data.kills);
         setDeaths(response.data.deaths);
+        setWeapon(response.data.weapon);
       })
       .catch((error) => {
         // Handle error
         console.error(error);
-      }),
-    []
-  );
+      });
+  }, [token]);
 
   function handlePlay() {
     navigate("/play");
@@ -94,7 +95,7 @@ export default function Home({ setToken }) {
         <h1 className="title text-6xl">Simple Adventure</h1>
       </div>
       <div className="flex items-center mx-5 mt-5">
-        <div className="flex flex-col w-1/2 m-auto mt-10">
+        <div className="flex flex-col w-2/3 m-auto mt-10">
           <img
             src="/src/temp-img/paladin.png"
             alt="avatar"
@@ -104,16 +105,14 @@ export default function Home({ setToken }) {
             <p className="font-cursive ml-2 text-2xl">Name: {name}</p>
             <p className="font-cursive ml-2 text-2xl">HP: {hp}</p>
             <p className="font-cursive ml-2 text-2xl">
-              Weapon:{" "}
-              <Button compact onClick={handleOpen} size="large" className="">
+              Weapon:
+              <Button onClick={handleOpen} size="large" compact>
                 <span className=" font-cursive">
-                  {weapon === 1 && "Basic Sword"}
-                  {weapon === 2 && "Basic Dagger"}
-                  {weapon === 3 && "Basic Battle Axe"}
-                  {weapon === 4 && "Basic Bow"}
+                  {`${weaponName} (${weapon.damage} Damage)`}{" "}
+                  <ArrowRightAltIcon />
                 </span>
               </Button>
-              {/* <Modal
+              <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
@@ -121,40 +120,32 @@ export default function Home({ setToken }) {
                 className=" overflow-auto mb-10"
               >
                 <Box className="absolute top-1/4 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black overflow-auto max-w-screen-2xl">
-                  <div
-                    id="modal-modal-description"
-                    className=" text-center font-cursive text-xl"
-                  ></div>
-                  {weapons &&
-                    weapons.map((weapon, index) => (
-                      <div key={index} className=" flex flex-col ">
-                        <span className="text-2xl underline">
-                          {weapon.name}
-                        </span>
-                        <span>Attack: {weapon.attack}</span>
-                        <span>Damage: {weapon.damage}</span>
-                        <span>Defense: {weapon.defense}</span>
-                        <span>Speed: {weapon.speed}</span>
-                        {weapon.name === "Basic Sword" && (
-                          <img src="src/temp-img/basicsword.png" />
-                        )}
-                        {weapon.name === "Basic Dagger" && (
-                          <img src="src/temp-img/basicdagger.png" />
-                        )}
-                        {weapon.name === "Basic Battle Axe" && (
-                          <img src="src/temp-img/basicbattleaxe.png" />
-                        )}
-                        {weapon.name === "Basic Bow" && (
-                          <img src="src/temp-img/basicbow.png" />
-                        )}
-                      </div>
-                    ))}
+                  <div className="flex flex-col text-center my-2">
+                    <span>Attack: {weapon.attack}</span>
+                    <span>Damage: {weapon.damage}</span>
+                    <span>Defense: {weapon.defense}</span>
+                    <span>Speed: {weapon.speed}</span>
+                    {weaponName === "Basic Sword" && (
+                      <span className="flex justify-center">
+                        <img
+                          className="w-1/3 center"
+                          src="src/temp-img/basicsword.png"
+                        />
+                      </span>
+                    )}
+                  </div>
                 </Box>
-              </Modal> */}
+              </Modal>
             </p>
-            <p className="font-cursive ml-2 text-2xl">Attack: {attack}</p>
-            <p className="font-cursive ml-2 text-2xl">Defense: {defense}</p>
-            <p className="font-cursive ml-2 text-2xl">Speed: {speed}</p>
+            <p className="font-cursive ml-2 text-2xl">
+              Attack: {attack} + {weapon.attack}
+            </p>
+            <p className="font-cursive ml-2 text-2xl">
+              Defense: {defense} + {weapon.defense}
+            </p>
+            <p className="font-cursive ml-2 text-2xl">
+              Speed: {speed} + {weapon.speed}
+            </p>
             <p className="font-cursive ml-2 text-2xl">Kills: {kills}</p>
             <p className="font-cursive ml-2 text-2xl">Deaths: {deaths}</p>
             <p className="font-cursive ml-2 text-2xl">
