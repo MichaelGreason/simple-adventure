@@ -139,13 +139,15 @@ export default function Home({ setToken }) {
                 </Modal>
               </p>
               <p className="font-cursive ml-2 text-2xl">
-                Attack: {attack} + {weapon.attack}
+                Attack: {attack} + {`(${weapon.attack})`} ={" "}
+                {attack + weapon.attack}
               </p>
               <p className="font-cursive ml-2 text-2xl">
-                Defense: {defense} + {weapon.defense}
+                Defense: {defense} + {`(${weapon.defense})`} ={" "}
+                {defense + weapon.defense}
               </p>
               <p className="font-cursive ml-2 text-2xl">
-                Speed: {speed} + {weapon.speed}
+                Speed: {speed} + {`(${weapon.speed})`} = {speed + weapon.speed}
               </p>
               <p className="font-cursive ml-2 text-2xl">Kills: {kills}</p>
               <p className="font-cursive ml-2 text-2xl">Deaths: {deaths}</p>
