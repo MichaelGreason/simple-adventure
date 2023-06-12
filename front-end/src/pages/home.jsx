@@ -6,12 +6,13 @@ import { Box, Modal } from "@mui/material";
 import TokenContext from "../context/AuthContext";
 import axios from "axios";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 export default function Home({ setToken }) {
   const navigate = useNavigate();
   const [name, setName] = useState();
   const [hp, setHp] = useState();
-  const [weapon, setWeapon] = useState();
+  const [weaponName, setWeaponName] = useState();
   const [attack, setAttack] = useState();
   const [defense, setDefense] = useState();
   const [speed, setSpeed] = useState();
@@ -23,6 +24,7 @@ export default function Home({ setToken }) {
   const token = useContext(TokenContext);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [weapon, setWeapon] = useState();
 
   useEffect(() => {
     axios
@@ -47,12 +49,13 @@ export default function Home({ setToken }) {
         console.log(response.data);
         setName(response.data.name);
         setHp(response.data.hit_points);
-        setWeapon(response.data.weapon.name);
+        setWeaponName(response.data.weapon.name);
         setAttack(response.data.attack);
         setDefense(response.data.defense);
         setSpeed(response.data.speed);
         setKills(response.data.kills);
         setDeaths(response.data.deaths);
+        setWeapon(response.data.weapon);
       })
       .catch((error) => {
         // Handle error
@@ -101,10 +104,48 @@ export default function Home({ setToken }) {
           <div className="flex flex-col items-center justify-center">
             <p className="font-cursive ml-2 text-2xl">Name: {name}</p>
             <p className="font-cursive ml-2 text-2xl">HP: {hp}</p>
-            <p className="font-cursive ml-2 text-2xl">Weapon: {weapon} </p>
-            <p className="font-cursive ml-2 text-2xl">Attack: {attack}</p>
-            <p className="font-cursive ml-2 text-2xl">Defense: {defense}</p>
-            <p className="font-cursive ml-2 text-2xl">Speed: {speed}</p>
+            <p className="font-cursive ml-2 text-2xl">
+              Weapon:
+              <Button onClick={handleOpen} size="large" compact>
+                <span className=" font-cursive">
+                  {`${weaponName} (${weapon.damage} Damage)`}{" "}
+                  <ArrowRightAltIcon />
+                </span>
+              </Button>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                className=" overflow-auto mb-10"
+              >
+                <Box className="absolute top-1/4 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black overflow-auto max-w-screen-2xl">
+                  <div className="flex flex-col text-center my-2">
+                    <span>Attack: {weapon.attack}</span>
+                    <span>Damage: {weapon.damage}</span>
+                    <span>Defense: {weapon.defense}</span>
+                    <span>Speed: {weapon.speed}</span>
+                    {weaponName === "Basic Sword" && (
+                      <span className="flex justify-center">
+                        <img
+                          className="w-1/3 center"
+                          src="src/temp-img/basicsword.png"
+                        />
+                      </span>
+                    )}
+                  </div>
+                </Box>
+              </Modal>
+            </p>
+            <p className="font-cursive ml-2 text-2xl">
+              Attack: {attack} + {weapon.attack}
+            </p>
+            <p className="font-cursive ml-2 text-2xl">
+              Defense: {defense} + {weapon.defense}
+            </p>
+            <p className="font-cursive ml-2 text-2xl">
+              Speed: {speed} + {weapon.speed}
+            </p>
             <p className="font-cursive ml-2 text-2xl">Kills: {kills}</p>
             <p className="font-cursive ml-2 text-2xl">Deaths: {deaths}</p>
             <p className="font-cursive ml-2 text-2xl">
