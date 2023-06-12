@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Modal } from "@mui/material";
 import TokenContext from "../context/AuthContext";
 import axios from "axios";
+import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 
 export default function Home({ setToken }) {
   const navigate = useNavigate();
@@ -100,9 +101,7 @@ export default function Home({ setToken }) {
           <div className="flex flex-col items-center justify-center">
             <p className="font-cursive ml-2 text-2xl">Name: {name}</p>
             <p className="font-cursive ml-2 text-2xl">HP: {hp}</p>
-            <p className="font-cursive ml-2 text-2xl">
-              Weapon: {weapon} <span>view weapon</span>
-            </p>
+            <p className="font-cursive ml-2 text-2xl">Weapon: {weapon} </p>
             <p className="font-cursive ml-2 text-2xl">Attack: {attack}</p>
             <p className="font-cursive ml-2 text-2xl">Defense: {defense}</p>
             <p className="font-cursive ml-2 text-2xl">Speed: {speed}</p>
