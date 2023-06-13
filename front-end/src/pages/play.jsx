@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import axios from "axios";
 import { Button } from "semantic-ui-react";
 import _ from "lodash";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import TokenContext from "../context/AuthContext";
 
 export default function Play({
   setToken,
@@ -15,14 +16,37 @@ export default function Play({
   weapon,
   damage,
 }) {
-  console.log(playAttack);
-
+  const [enemy, setEnemy] = useState();
   const [roll, setRoll] = useState();
   const navigate = useNavigate();
   const an = [11, 18];
-  const [enemyHP, setEnemyHP] = useState(10);
-  const [enemyDefense, setEnemyDefense] = useState(10);
-  const [enemySpeed, setEnemySpeed] = useState(5);
+  const [enemyName, setEnemyName] = useState();
+  const [enemyHP, setEnemyHP] = useState();
+  const [enemyDamage, setEnemyDamage] = useState();
+  const [enemyAttack, setEnemyAttack] = useState();
+  const [enemyDefense, setEnemyDefense] = useState();
+  const [enemySpeed, setEnemySpeed] = useState();
+  const token = useContext(TokenContext);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/enemies", {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setEnemy(_.sample(response.data));
+        setEnemyHP(enemy.hit_points);
+        setEnemyName(enemy.name);
+        setEnemyDamage(enemy.damage);
+        setEnemyAttack(enemy.attack);
+        setEnemyDefense(enemy.defense);
+        setEnemySpeed(enemy.speed);
+      });
+  }, [token, enemyName]);
+  console.log(enemy);
 
   function rollDie() {
     setRoll(_.random(1, 20));
@@ -43,9 +67,15 @@ export default function Play({
             className="h-48 self-center"
           ></img>
           <div className="flex flex-col text-center justify-center ml-5">
-            <div className="font-cursive text-3xl self-center">Enemy</div>
+            <div className="font-cursive text-3xl self-center">{enemyName}</div>
             <div className="font-cursive text-xl self-center">
               HP: {enemyHP}
+            </div>
+            <div className="font-cursive text-xl self-center">
+              Damage: {enemyDamage}
+            </div>
+            <div className="font-cursive text-xl self-center">
+              Attack: {enemyAttack}
             </div>
             <div className="font-cursive text-xl self-center">
               Defense: {enemyDefense}
