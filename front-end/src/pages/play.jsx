@@ -20,9 +20,7 @@ export default function Play({
   const navigate = useNavigate();
   const an = [11, 18];
   const [enemyHP, setEnemyHP] = useState(10);
-  const [userDefense, setUserDefense] = useState(10);
   const [enemyDefense, setEnemyDefense] = useState(10);
-  const [userSpeed, setUserSpeed] = useState(5);
   const [enemySpeed, setEnemySpeed] = useState(5);
 
   function rollDie() {
@@ -49,10 +47,10 @@ export default function Play({
               HP: {enemyHP}
             </div>
             <div className="font-cursive text-xl self-center">
-              Speed: {enemySpeed}
+              Defense: {enemyDefense}
             </div>
             <div className="font-cursive text-xl self-center">
-              Defense: {enemyDefense}
+              Speed: {enemySpeed}
             </div>
           </div>
         </div>
@@ -80,10 +78,16 @@ export default function Play({
             <div className="font-cursive text-3xl self-center">{name}</div>
             <div className="font-cursive text-xl self-center">HP: {hp}</div>
             <div className="font-cursive text-xl self-center">
-              Speed: {playSpeed}
+              Damage: {weapon.damage}
             </div>
             <div className="font-cursive text-xl self-center">
-              Defense: {userDefense}
+              Attack: {playAttack}
+            </div>
+            <div className="font-cursive text-xl self-center">
+              Defense: {playDefense}
+            </div>
+            <div className="font-cursive text-xl self-center">
+              Speed: {playSpeed}
             </div>
           </div>
         </div>

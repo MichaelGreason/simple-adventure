@@ -16,6 +16,9 @@ function App() {
   const [playAttack, setPlayAttack] = useState();
   const [playDefense, setPlayDefense] = useState();
   const [playSpeed, setPlaySpeed] = useState();
+  const [name, setName] = useState();
+  const [hp, setHp] = useState();
+  const [weapon, setWeapon] = useState();
 
   return (
     <>
@@ -33,6 +36,12 @@ function App() {
                   setPlayDefense={setPlayDefense}
                   playSpeed={playSpeed}
                   setPlaySpeed={setPlaySpeed}
+                  name={name}
+                  setName={setName}
+                  hp={hp}
+                  setHp={setHp}
+                  weapon={weapon}
+                  setWeapon={setWeapon}
                 />
               ) : (
                 <SignUp setToken={setToken} />
@@ -41,7 +50,26 @@ function App() {
           />
           <Route path="/sign-up" element={<SignUp setToken={setToken} />} />
           <Route path="/sign-in" element={<SignIn setToken={setToken} />} />
-          <Route path="/play" element={<Play setToken={setToken} />} />
+          <Route
+            path="/play"
+            element={
+              <Play
+                setToken={setToken}
+                playAttack={playAttack}
+                setPlayAttack={setPlayAttack}
+                playDefense={playDefense}
+                setPlayDefense={setPlayDefense}
+                playSpeed={playSpeed}
+                setPlaySpeed={setPlaySpeed}
+                name={name}
+                setName={setName}
+                hp={hp}
+                setHp={setHp}
+                weapon={weapon}
+                setWeapon={setWeapon}
+              />
+            }
+          />
           <Route path="/create-player" element={<CreatePlayer />} />
         </Routes>
       </TokenContext.Provider>

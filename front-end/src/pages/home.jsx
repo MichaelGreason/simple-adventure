@@ -7,7 +7,6 @@ import TokenContext from "../context/AuthContext";
 import axios from "axios";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import Play from "./play";
 
 export default function Home({
   setToken,
@@ -17,10 +16,14 @@ export default function Home({
   setPlayDefense,
   playSpeed,
   setPlaySpeed,
+  hp,
+  setHp,
+  name,
+  setName,
+  weapon,
+  setWeapon,
 }) {
   const navigate = useNavigate();
-  const [name, setName] = useState();
-  const [hp, setHp] = useState();
   const [weaponName, setWeaponName] = useState();
   const [attack, setAttack] = useState();
   const [defense, setDefense] = useState();
@@ -33,7 +36,6 @@ export default function Home({
   const token = useContext(TokenContext);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [weapon, setWeapon] = useState();
 
   useEffect(() => {
     axios
