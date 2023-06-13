@@ -13,6 +13,7 @@ export default function Play({
   hp,
   name,
   weapon,
+  damage,
 }) {
   console.log(playAttack);
 
@@ -78,7 +79,7 @@ export default function Play({
             <div className="font-cursive text-3xl self-center">{name}</div>
             <div className="font-cursive text-xl self-center">HP: {hp}</div>
             <div className="font-cursive text-xl self-center">
-              Damage: {weapon.damage}
+              Damage: {damage}
             </div>
             <div className="font-cursive text-xl self-center">
               Attack: {playAttack}
