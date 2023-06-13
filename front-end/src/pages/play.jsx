@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { Button } from "semantic-ui-react";
 import _ from "lodash";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Play() {
+export default function Play({
+  setToken,
+  playAttack,
+  playDefense,
+  playSpeed,
+  hp,
+  name,
+  weapon,
+}) {
+  console.log(playAttack);
+
   const [roll, setRoll] = useState();
   const navigate = useNavigate();
   const an = [11, 18];
-  const [userHP, setUserHP] = useState(10);
   const [enemyHP, setEnemyHP] = useState(10);
   const [userDefense, setUserDefense] = useState(10);
   const [enemyDefense, setEnemyDefense] = useState(10);
@@ -68,10 +77,10 @@ export default function Play() {
             className="h-48 self-center"
           ></img>
           <div className="flex flex-col text-center justify-center ml-5">
-            <div className="font-cursive text-3xl self-center">User</div>
-            <div className="font-cursive text-xl self-center">HP: {userHP}</div>
+            <div className="font-cursive text-3xl self-center">{name}</div>
+            <div className="font-cursive text-xl self-center">HP: {hp}</div>
             <div className="font-cursive text-xl self-center">
-              Speed: {userSpeed}
+              Speed: {playSpeed}
             </div>
             <div className="font-cursive text-xl self-center">
               Defense: {userDefense}
