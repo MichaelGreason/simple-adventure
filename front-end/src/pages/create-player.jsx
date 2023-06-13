@@ -119,7 +119,7 @@ export default function CreatePlayer() {
       attack: attack,
       defense: defense,
       speed: speed,
-      weapon: selectedWeapon.id,
+      weapon: selectedWeapon,
     };
     axios
       .patch("http://127.0.0.1:8000/profile", data, {

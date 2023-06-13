@@ -51,34 +51,35 @@ export default function Home({
       .catch((error) => {
         console.error(error);
       });
-    axios
-      .get("http://127.0.0.1:8000/profile", {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      })
-      .then((response) => {
-        // Handle successful response
-        console.log(response.data);
-        setName(response.data.name);
-        setHp(response.data.hit_points);
-        setWeaponName(response.data.weapon.name);
-        setAttack(response.data.attack);
-        setDefense(response.data.defense);
-        setSpeed(response.data.speed);
-        setKills(response.data.kills);
-        setDeaths(response.data.deaths);
-        setWeapon(response.data.weapon);
-        setDamage(response.data.weapon.damage);
-        setPlayAttack(attack + weapon.attack);
-        setPlayDefense(defense + weapon.defense);
-        setPlaySpeed(speed + weapon.speed);
-      })
-      .catch((error) => {
-        // Handle error
-        console.error(error);
-      });
-  }, [token, attack]);
+
+    if (token)
+      axios
+        .get("http://127.0.0.1:8000/profile", {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setName(response.data.name);
+          setHp(response.data.hit_points);
+          setWeaponName(response.data.weapon.name);
+          setAttack(response.data.attack);
+          setDefense(response.data.defense);
+          setSpeed(response.data.speed);
+          setKills(response.data.kills);
+          setDeaths(response.data.deaths);
+          setWeapon(response.data.weapon);
+          setDamage(response.data.weapon.damage);
+          setPlayAttack(attack + weapon.attack);
+          setPlayDefense(defense + weapon.defense);
+          setPlaySpeed(speed + weapon.speed);
+        })
+        .catch((error) => {
+          // Handle error
+          console.error(error);
+        });
+  }, [token]);
 
   function handlePlay() {
     navigate("/play");
@@ -106,99 +107,99 @@ export default function Home({
       });
   }
 
-  if (weapons && name && hp && weaponName && playAttack)
-    return (
-      <>
-        <div className=" text-center mt-10">
-          <h1 className="title text-6xl">Simple Adventure</h1>
-        </div>
-        <div className="flex items-center mx-5 mt-5">
-          <div className="flex flex-col w-2/3 m-auto mt-10">
-            <img
-              src="/src/temp-img/paladin.png"
-              alt="avatar"
-              className="mb-5 h-48 self-center"
-            ></img>
-            <div className="flex flex-col items-center justify-center">
-              <p className="font-cursive ml-2 text-2xl">Name: {name}</p>
-              <p className="font-cursive ml-2 text-2xl">HP: {hp}</p>
+  if (!weapons || !name || !hp || !weaponName || !playAttack) {
+    return <div>Loading..</div>;
+  }
+  return (
+    <>
+      <div className=" text-center mt-10">
+        <h1 className="title text-6xl">Simple Adventure</h1>
+      </div>
+      <div className="flex items-center mx-5 mt-5">
+        <div className="flex flex-col w-2/3 m-auto mt-10">
+          <img
+            src="/src/temp-img/paladin.png"
+            alt="avatar"
+            className="mb-5 h-48 self-center"
+          ></img>
+          <div className="flex flex-col items-center justify-center">
+            <p className="font-cursive ml-2 text-2xl">Name: {name}</p>
+            <p className="font-cursive ml-2 text-2xl">HP: {hp}</p>
+            <p className="font-cursive ml-2 text-2xl">
+              Weapon:
+              <Button onClick={handleOpen} size="large" compact>
+                <span className=" font-cursive">
+                  {`${weaponName} (${damage} Damage)`} <ArrowRightAltIcon />
+                </span>
+              </Button>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                className=" overflow-auto mb-10"
+              >
+                <Box className="absolute top-1/4 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black overflow-auto max-w-screen-2xl">
+                  <div className="flex flex-col text-center my-2">
+                    <span>Attack: {weapon.attack}</span>
+                    <span>Damage: {weapon.damage}</span>
+                    <span>Defense: {weapon.defense}</span>
+                    <span>Speed: {weapon.speed}</span>
+                    {weaponName === "Basic Sword" && (
+                      <span className="flex justify-center">
+                        <img
+                          className="w-1/3 center"
+                          src="src/temp-img/basicsword.png"
+                        />
+                      </span>
+                    )}
+                  </div>
+                </Box>
+              </Modal>
+            </p>
+            <Tooltip
+              title={`Player(${attack}) + Weapon(${weapon.attack})`}
+              placement="right"
+            >
+              <p className="font-cursive ml-2 text-2xl">Attack: {playAttack}</p>
+            </Tooltip>
+            <Tooltip
+              title={`Player(${defense}) + Weapon(${weapon.defense})`}
+              placement="right"
+            >
               <p className="font-cursive ml-2 text-2xl">
-                Weapon:
-                <Button onClick={handleOpen} size="large" compact>
-                  <span className=" font-cursive">
-                    {`${weaponName} (${damage} Damage)`} <ArrowRightAltIcon />
-                  </span>
-                </Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                  className=" overflow-auto mb-10"
-                >
-                  <Box className="absolute top-1/4 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black overflow-auto max-w-screen-2xl">
-                    <div className="flex flex-col text-center my-2">
-                      <span>Attack: {weapon.attack}</span>
-                      <span>Damage: {weapon.damage}</span>
-                      <span>Defense: {weapon.defense}</span>
-                      <span>Speed: {weapon.speed}</span>
-                      {weaponName === "Basic Sword" && (
-                        <span className="flex justify-center">
-                          <img
-                            className="w-1/3 center"
-                            src="src/temp-img/basicsword.png"
-                          />
-                        </span>
-                      )}
-                    </div>
-                  </Box>
-                </Modal>
+                Defense: {playDefense}
               </p>
-              <Tooltip
-                title={`Player(${attack}) + Weapon(${weapon.attack})`}
-                placement="right"
-              >
-                <p className="font-cursive ml-2 text-2xl">
-                  Attack: {playAttack}
-                </p>
-              </Tooltip>
-              <Tooltip
-                title={`Player(${defense}) + Weapon(${weapon.defense})`}
-                placement="right"
-              >
-                <p className="font-cursive ml-2 text-2xl">
-                  Defense: {playDefense}
-                </p>
-              </Tooltip>
-              <Tooltip
-                title={`Player(${speed}) + Weapon(${weapon.speed})`}
-                placement="right"
-              >
-                <p className="font-cursive ml-2 text-2xl">Speed: {playSpeed}</p>
-              </Tooltip>
-              <p className="font-cursive ml-2 text-2xl">Kills: {kills}</p>
-              <p className="font-cursive ml-2 text-2xl">Deaths: {deaths}</p>
-              <p className="font-cursive ml-2 text-2xl">
-                Highest Streak: {streak}
-              </p>
-            </div>
+            </Tooltip>
+            <Tooltip
+              title={`Player(${speed}) + Weapon(${weapon.speed})`}
+              placement="right"
+            >
+              <p className="font-cursive ml-2 text-2xl">Speed: {playSpeed}</p>
+            </Tooltip>
+            <p className="font-cursive ml-2 text-2xl">Kills: {kills}</p>
+            <p className="font-cursive ml-2 text-2xl">Deaths: {deaths}</p>
+            <p className="font-cursive ml-2 text-2xl">
+              Highest Streak: {streak}
+            </p>
           </div>
         </div>
-        <div className="mt-10 text-center">
-          <Button className="h-20" color="black" circular onClick={handlePlay}>
-            <span className="font-cursive">PLAY</span>
-          </Button>
-        </div>
-        <div className="mt-10 text-center">
-          <Button
-            className="h-20 w-20"
-            color="black"
-            circular
-            onClick={handleLogout}
-          >
-            <span className="font-cursive flex-wrap">Sign Out</span>
-          </Button>
-        </div>
-      </>
-    );
+      </div>
+      <div className="mt-10 text-center">
+        <Button className="h-20" color="black" circular onClick={handlePlay}>
+          <span className="font-cursive">PLAY</span>
+        </Button>
+      </div>
+      <div className="mt-10 text-center">
+        <Button
+          className="h-20 w-20"
+          color="black"
+          circular
+          onClick={handleLogout}
+        >
+          <span className="font-cursive flex-wrap">Sign Out</span>
+        </Button>
+      </div>
+    </>
+  );
 }
