@@ -19,6 +19,7 @@ function App() {
   const [name, setName] = useState();
   const [hp, setHp] = useState();
   const [weapon, setWeapon] = useState();
+  const [damage, setDamage] = useState();
 
   return (
     <>
@@ -42,6 +43,8 @@ function App() {
                   setHp={setHp}
                   weapon={weapon}
                   setWeapon={setWeapon}
+                  damage={damage}
+                  setDamage={setDamage}
                 />
               ) : (
                 <SignUp setToken={setToken} />
@@ -67,6 +70,8 @@ function App() {
                 setHp={setHp}
                 weapon={weapon}
                 setWeapon={setWeapon}
+                damage={damage}
+                setDamage={setDamage}
               />
             }
           />

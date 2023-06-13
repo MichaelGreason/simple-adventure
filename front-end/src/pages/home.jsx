@@ -22,6 +22,8 @@ export default function Home({
   setName,
   weapon,
   setWeapon,
+  damage,
+  setDamage,
 }) {
   const navigate = useNavigate();
   const [weaponName, setWeaponName] = useState();
@@ -67,6 +69,7 @@ export default function Home({
         setKills(response.data.kills);
         setDeaths(response.data.deaths);
         setWeapon(response.data.weapon);
+        setDamage(response.data.weapon.damage);
         setPlayAttack(attack + weapon.attack);
         setPlayDefense(defense + weapon.defense);
         setPlaySpeed(speed + weapon.speed);
@@ -123,8 +126,7 @@ export default function Home({
                 Weapon:
                 <Button onClick={handleOpen} size="large" compact>
                   <span className=" font-cursive">
-                    {`${weaponName} (${weapon.damage} Damage)`}{" "}
-                    <ArrowRightAltIcon />
+                    {`${weaponName} (${damage} Damage)`} <ArrowRightAltIcon />
                   </span>
                 </Button>
                 <Modal
