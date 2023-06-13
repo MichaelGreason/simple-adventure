@@ -77,7 +77,7 @@ export default function Home({
         // Handle error
         console.error(error);
       });
-  }, [token]);
+  }, [token, playAttack]);
 
   function handlePlay() {
     navigate("/play");
@@ -146,6 +146,30 @@ export default function Home({
                           <img
                             className="w-1/3 center"
                             src="src/temp-img/basicsword.png"
+                          />
+                        </span>
+                      )}
+                      {weaponName === "Basic Dagger" && (
+                        <span className="flex justify-center">
+                          <img
+                            className="w-1/3 center"
+                            src="src/temp-img/basicdagger.png"
+                          />
+                        </span>
+                      )}
+                      {weaponName === "Basic Battle Axe" && (
+                        <span className="flex justify-center">
+                          <img
+                            className="w-1/3 center"
+                            src="src/temp-img/basicbattleaxe.png"
+                          />
+                        </span>
+                      )}
+                      {weaponName === "Basic Bow" && (
+                        <span className="flex justify-center">
+                          <img
+                            className="w-1/3 center"
+                            src="src/temp-img/basicbow.png"
                           />
                         </span>
                       )}
