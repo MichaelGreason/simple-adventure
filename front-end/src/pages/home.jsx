@@ -8,10 +8,22 @@ import axios from "axios";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
-export default function Home({ setToken }) {
+export default function Home({
+  setToken,
+  playAttack,
+  setPlayAttack,
+  playDefense,
+  setPlayDefense,
+  playSpeed,
+  setPlaySpeed,
+  hp,
+  setHp,
+  name,
+  setName,
+  weapon,
+  setWeapon,
+}) {
   const navigate = useNavigate();
-  const [name, setName] = useState();
-  const [hp, setHp] = useState();
   const [weaponName, setWeaponName] = useState();
   const [attack, setAttack] = useState();
   const [defense, setDefense] = useState();
@@ -24,7 +36,6 @@ export default function Home({ setToken }) {
   const token = useContext(TokenContext);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [weapon, setWeapon] = useState();
 
   useEffect(() => {
     axios
@@ -56,12 +67,15 @@ export default function Home({ setToken }) {
         setKills(response.data.kills);
         setDeaths(response.data.deaths);
         setWeapon(response.data.weapon);
+        setPlayAttack(attack + weapon.attack);
+        setPlayDefense(defense + weapon.defense);
+        setPlaySpeed(speed + weapon.speed);
       })
       .catch((error) => {
         // Handle error
         console.error(error);
       });
-  }, [token]);
+  }, [token, attack]);
 
   function handlePlay() {
     navigate("/play");
@@ -89,7 +103,7 @@ export default function Home({ setToken }) {
       });
   }
 
-  if (weapons)
+  if (weapons && name && hp && weaponName && playAttack)
     return (
       <>
         <div className=" text-center mt-10">
@@ -143,7 +157,7 @@ export default function Home({ setToken }) {
                 placement="right"
               >
                 <p className="font-cursive ml-2 text-2xl">
-                  Attack: {attack + weapon.attack}
+                  Attack: {playAttack}
                 </p>
               </Tooltip>
               <Tooltip
@@ -151,16 +165,14 @@ export default function Home({ setToken }) {
                 placement="right"
               >
                 <p className="font-cursive ml-2 text-2xl">
-                  Defense: {defense + weapon.defense}
+                  Defense: {playDefense}
                 </p>
               </Tooltip>
               <Tooltip
                 title={`Player(${speed}) + Weapon(${weapon.speed})`}
                 placement="right"
               >
-                <p className="font-cursive ml-2 text-2xl">
-                  Speed: {speed + weapon.speed}
-                </p>
+                <p className="font-cursive ml-2 text-2xl">Speed: {playSpeed}</p>
               </Tooltip>
               <p className="font-cursive ml-2 text-2xl">Kills: {kills}</p>
               <p className="font-cursive ml-2 text-2xl">Deaths: {deaths}</p>
