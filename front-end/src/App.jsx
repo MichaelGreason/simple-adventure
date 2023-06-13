@@ -16,7 +16,7 @@ function App() {
   const [playAttack, setPlayAttack] = useState();
   const [playDefense, setPlayDefense] = useState();
   const [playSpeed, setPlaySpeed] = useState();
-  const [name, setName] = useState();
+  const [name, setName] = useState("");
   const [hp, setHp] = useState();
   const [weapon, setWeapon] = useState();
   const [damage, setDamage] = useState();
