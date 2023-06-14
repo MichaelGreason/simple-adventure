@@ -28,16 +28,16 @@ class UserSerializer(serializers.ModelSerializer):
             'deaths',
         )
 
-    def update(self, instance, validated_data):
-        weapon_data = validated_data.pop('weapon', None)
+    # def update(self, instance, validated_data):
+    #     weapon_data = validated_data.pop('weapon', None)
 
-        if weapon_data is not None:
-            weapon_serializer = WeaponSerializer(
-                instance.weapon, data=weapon_data)
-            weapon_serializer.is_valid(raise_exception=True)
-            weapon_serializer.save()
+    #     if weapon_data is not None:
+    #         weapon_serializer = WeaponSerializer(
+    #             instance.weapon, data=weapon_data)
+    #         weapon_serializer.is_valid(raise_exception=True)
+    #         weapon_serializer.save()
 
-        return super().update(instance, validated_data)
+    #     return super().update(instance, validated_data)
 
 
 class EnemySerializer(serializers.ModelSerializer):
