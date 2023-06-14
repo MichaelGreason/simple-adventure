@@ -10,7 +10,7 @@ class WeaponSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    weapon = WeaponSerializer(read_only=True, many=False)
+    weapon = WeaponSerializer(many=False)
 
     class Meta:
         model = User
