@@ -26,14 +26,14 @@ export default function Home({
   setDamage,
 }) {
   const navigate = useNavigate();
-  const [weaponName, setWeaponName] = useState();
-  const [attack, setAttack] = useState();
-  const [defense, setDefense] = useState();
-  const [speed, setSpeed] = useState();
-  const [kills, setKills] = useState();
-  const [deaths, setDeaths] = useState();
-  const [streak, setStreak] = useState();
-  const [weapons, setWeapons] = useState();
+  const [weaponName, setWeaponName] = useState("");
+  const [attack, setAttack] = useState(0);
+  const [defense, setDefense] = useState(0);
+  const [speed, setSpeed] = useState(0);
+  const [kills, setKills] = useState(0);
+  const [deaths, setDeaths] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [weapons, setWeapons] = useState("");
   const [open, setOpen] = useState(false);
   const token = useContext(TokenContext);
   const handleOpen = () => setOpen(true);
@@ -105,7 +105,7 @@ export default function Home({
       });
   }
 
-  if (weapons && name && hp && weaponName && playAttack) {
+  if (weapons && name && hp && weaponName && playAttack && attack) {
     return (
       <>
         <div className=" text-center mt-10">
