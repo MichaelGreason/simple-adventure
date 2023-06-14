@@ -13,6 +13,11 @@ class UserProfile(generics.RetrieveUpdateDestroyAPIView):
         return self.request.user
 
 
+class Users(generics.ListAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+
 class Enemies(generics.ListAPIView):
     serializer_class = EnemySerializer
     queryset = Enemy.objects.all()
