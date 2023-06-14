@@ -45,7 +45,7 @@ export default function Play({
     if (enemy) {
       setEnemyHP(enemy.hit_points);
       setEnemyName(enemy.name);
-      setEnemyDamage(enemy.damage);
+      setEnemyDamage(enemy.weapon.damage);
       setEnemyAttack(enemy.attack);
       setEnemyDefense(enemy.defense);
       setEnemySpeed(enemy.speed);
