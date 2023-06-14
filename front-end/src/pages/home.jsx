@@ -105,7 +105,7 @@ export default function Home({
       });
   }
 
-  if (weapons && name && hp && weaponName && playAttack) {
+  if (weapons && name && hp && weaponName && playAttack && attack) {
     return (
       <>
         <div className=" text-center mt-10">
