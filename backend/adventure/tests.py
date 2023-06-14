@@ -11,8 +11,8 @@ enemy = Enemy.objects.get(id=1)  # Replace <enemy_id> with the actual enemy ID
 attack_result = player_attack(user, enemy)
 print("Player attack result:", attack_result)
 
-enemy_attack_result = enemy_attack(user, enemy)
-print("Enemy attack result:", enemy_attack_result)
+# enemy_attack_result = enemy_attack(user, enemy)
+# print("Enemy attack result:", enemy_attack_result)
 
-initiative_result = determine_initiative(user, enemy)
-print("Initiative result:", initiative_result)
+# initiative_result = determine_initiative(user, enemy)
+# print("Initiative result:", initiative_result)
