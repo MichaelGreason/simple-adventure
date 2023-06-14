@@ -17,7 +17,7 @@ export default function CreatePlayer() {
   const [weapons, setWeapons] = useState([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 1;
-  const [selectedWeapon, setSelectedWeapon] = useState("");
+  const [selectedWeapon, setSelectedWeapon] = useState({});
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handleOpen = () => setOpen(true);
@@ -51,7 +51,7 @@ export default function CreatePlayer() {
         // Handle error
         console.error(error);
       }),
-    []
+    [token]
   );
 
   function handleAttackAdd() {
