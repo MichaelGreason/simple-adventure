@@ -64,7 +64,7 @@ export default function Play({
   if (name)
     return (
       <>
-        <div className=" flex justify-center items-center flex-col h-screen">
+        <div className=" flex justify-center items-center flex-col my-20">
           <div className="flex mb-10">
             <img
               src="/src/temp-img/ogre.png"
@@ -98,13 +98,6 @@ export default function Play({
               className="w-1/5 cursor-pointer"
               src="/src/temp-img/20sideddie.png"
             />
-            <div className="text-2xl font-cursive ml-2">
-              {roll > 0
-                ? an.includes(roll)
-                  ? `You rolled an ${roll} `
-                  : `You rolled a ${roll} `
-                : "Roll!"}
-            </div>
           </div>
           <div className="flex mt-10">
             <img
@@ -134,6 +127,16 @@ export default function Play({
           <Button color="black" onClick={handleQuit}>
             <span className="font-cursive">QUIT</span>
           </Button>
+        </div>
+        <div className=" border-t-4">
+          {" "}
+          <div className="text-2xl font-cursive ml-2">
+            {roll > 0
+              ? an.includes(roll)
+                ? `You rolled an ${roll} `
+                : `You rolled a ${roll} `
+              : "Roll!"}
+          </div>
         </div>
       </>
     );
