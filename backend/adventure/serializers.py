@@ -2,13 +2,6 @@ from rest_framework import serializers
 from .models import User, Enemy, Weapon
 
 
-class EnemySerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Enemy
-        fields = '__all__'
-
-
 class WeaponSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -33,3 +26,11 @@ class UserSerializer(serializers.ModelSerializer):
             'kills',
             'deaths',
         )
+
+
+class EnemySerializer(serializers.ModelSerializer):
+    weapon = WeaponSerializer(read_only=True, many=False)
+
+    class Meta:
+        model = Enemy
+        fields = '__all__'
