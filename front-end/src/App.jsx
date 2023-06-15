@@ -13,13 +13,13 @@ import { useState } from "react";
 
 function App() {
   const [token, setToken] = useLocalStorageState("token", null);
-  const [playAttack, setPlayAttack] = useState(0);
-  const [playDefense, setPlayDefense] = useState(0);
-  const [playSpeed, setPlaySpeed] = useState(0);
-  const [name, setName] = useState(" ");
-  const [hp, setHp] = useState(0);
-  const [weapon, setWeapon] = useState({});
-  const [damage, setDamage] = useState(0);
+  const [playAttack, setPlayAttack] = useState();
+  const [playDefense, setPlayDefense] = useState();
+  const [playSpeed, setPlaySpeed] = useState();
+  const [name, setName] = useState();
+  const [hp, setHp] = useState();
+  const [weapon, setWeapon] = useState();
+  const [damage, setDamage] = useState();
 
   return (
     <>
