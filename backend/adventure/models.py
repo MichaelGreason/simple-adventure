@@ -3,7 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
-    name = models.CharField(default='player')
+    name = models.CharField(max_length=100, default='player')
     hit_points = models.IntegerField(default=0)
     attack = models.IntegerField(default=0)
     defense = models.IntegerField(default=0)
@@ -24,7 +24,7 @@ class User(AbstractUser):
 
 
 class Enemy(models.Model):
-    name = models.CharField(default='enemy')
+    name = models.CharField(max_length=100, default='enemy')
     hit_points = models.IntegerField(default=0)
     attack = models.IntegerField(default=0)
     defense = models.IntegerField(default=0)
@@ -45,7 +45,7 @@ class Enemy(models.Model):
 
 
 class Weapon(models.Model):
-    name = models.CharField(default='weapon')
+    name = models.CharField(max_length=100, default='weapon')
     damage = models.IntegerField(default=0)
     attack = models.IntegerField(default=0)
     defense = models.IntegerField(default=0)
