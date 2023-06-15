@@ -10,9 +10,26 @@ class WeaponSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    # weapon = WeaponSerializer(read_only=False, many=False)
-    weapon = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Weapon.objects.all())
+    weapon_name = serializers.SerializerMethodField()
+    weapon_damage = serializers.SerializerMethodField()
+    weapon_attack = serializers.SerializerMethodField()
+    weapon_defense = serializers.SerializerMethodField()
+    weapon_speed = serializers.SerializerMethodField()
+
+    def get_weapon_name(self, obj):
+        return obj.weapon.name
+
+    def get_weapon_damage(self, obj):
+        return obj.weapon.damage
+
+    def get_weapon_attack(self, obj):
+        return obj.weapon.attack
+
+    def get_weapon_defense(self, obj):
+        return obj.weapon.defense
+
+    def get_weapon_speed(self, obj):
+        return obj.weapon.speed
 
     class Meta:
         model = User
@@ -25,21 +42,15 @@ class UserSerializer(serializers.ModelSerializer):
             'defense',
             'speed',
             'weapon',
+            'weapon_name',
+            'weapon_damage',
+            'weapon_attack',
+            'weapon_defense',
+            'weapon_speed',
             'skill_points',
             'kills',
             'deaths',
         )
-
-    # def update(self, instance, validated_data):
-    #     weapon_data = validated_data.pop('weapon', None)
-
-    #     if weapon_data is not None:
-    #         weapon_serializer = WeaponSerializer(
-    #             instance.weapon, data=weapon_data)
-    #         weapon_serializer.is_valid(raise_exception=True)
-    #         weapon_serializer.save()
-
-    #     return super().update(instance, validated_data)
 
 
 class EnemySerializer(serializers.ModelSerializer):
