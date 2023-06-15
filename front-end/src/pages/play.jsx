@@ -45,10 +45,10 @@ export default function Play({
     if (enemy) {
       setEnemyHP(enemy.hit_points);
       setEnemyName(enemy.name);
-      setEnemyDamage(enemy.weapon.damage);
-      setEnemyAttack(enemy.attack);
-      setEnemyDefense(enemy.defense);
-      setEnemySpeed(enemy.speed);
+      setEnemyDamage(enemy.weapon_damage);
+      setEnemyAttack(enemy.weapon_attack);
+      setEnemyDefense(enemy.weapon_defense);
+      setEnemySpeed(enemy.weapon_speed);
     }
   }, [enemy]);
 
@@ -61,7 +61,7 @@ export default function Play({
     navigate("/");
   }
 
-  if (name)
+  if (enemy)
     return (
       <>
         <div className=" flex justify-center items-center flex-col my-20">
