@@ -17,26 +17,27 @@ export default function CreatePlayer() {
   const [weapons, setWeapons] = useState([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 1;
-  const [selectedWeapon, setSelectedWeapon] = useState();
+  const [selectedWeapon, setSelectedWeapon] = useState({});
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  useEffect(
-    () => {
-      axios
-        .get("http://127.0.0.1:8000/weapons/basic", {
-          headers: { "Content-Type": "application/json" },
-        })
-        .then((response) => {
-          console.log(response);
-          setWeapons(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/weapons/basic", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setWeapons(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     axios
       .get("http://127.0.0.1:8000/profile", {
         headers: {
@@ -50,9 +51,8 @@ export default function CreatePlayer() {
       .catch((error) => {
         // Handle error
         console.error(error);
-      }),
-    [token]
-  );
+      });
+  }, [token]);
 
   function handleAttackAdd() {
     if (pointsLeft > 0) {
@@ -111,6 +111,7 @@ export default function CreatePlayer() {
   console.log(speed);
   console.log(selectedWeapon);
   console.log(hp);
+  console.log(weapons);
 
   function handlePlayGame() {
     const data = {
@@ -137,7 +138,7 @@ export default function CreatePlayer() {
       });
   }
 
-  if (weapons)
+  if (weapons.length > 0)
     return (
       <>
         <p className="text-3xl font-cursive ml-4 mt-8">Spend: {pointsLeft}</p>
