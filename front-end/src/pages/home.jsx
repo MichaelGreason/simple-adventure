@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { Box, Modal, Tooltip } from "@mui/material";
 import TokenContext from "../context/AuthContext";
 import axios from "axios";
-import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 export default function Home({
@@ -26,18 +25,21 @@ export default function Home({
   setDamage,
 }) {
   const navigate = useNavigate();
-  const [weaponName, setWeaponName] = useState("");
-  const [attack, setAttack] = useState(0);
-  const [defense, setDefense] = useState(0);
-  const [speed, setSpeed] = useState(0);
-  const [kills, setKills] = useState(0);
-  const [deaths, setDeaths] = useState(0);
-  const [streak, setStreak] = useState(0);
-  const [weapons, setWeapons] = useState("");
+  const [weaponName, setWeaponName] = useState();
+  const [attack, setAttack] = useState();
+  const [defense, setDefense] = useState();
+  const [speed, setSpeed] = useState();
+  const [kills, setKills] = useState();
+  const [deaths, setDeaths] = useState();
+  const [streak, setStreak] = useState();
+  const [weapons, setWeapons] = useState();
   const [open, setOpen] = useState(false);
   const token = useContext(TokenContext);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [weaponAttack, setWeaponAttack] = useState();
+  const [weaponDefense, setWeaponDefense] = useState();
+  const [weaponSpeed, setWeaponSpeed] = useState();
 
   useEffect(() => {
     axios
@@ -61,17 +63,20 @@ export default function Home({
         console.log(response.data);
         setName(response.data.name);
         setHp(response.data.hit_points);
-        setWeaponName(response.data.weapon.name);
+        setWeaponName(response.data.weapon_name);
         setAttack(response.data.attack);
         setDefense(response.data.defense);
         setSpeed(response.data.speed);
         setKills(response.data.kills);
         setDeaths(response.data.deaths);
         setWeapon(response.data.weapon);
-        setDamage(response.data.weapon.damage);
-        setPlayAttack(attack + weapon.attack);
-        setPlayDefense(defense + weapon.defense);
-        setPlaySpeed(speed + weapon.speed);
+        setDamage(response.data.weapon_damage);
+        setWeaponAttack(response.data.weapon_attack);
+        setWeaponDefense(response.data.weapon_defense);
+        setWeaponSpeed(response.data.weapon_speed);
+        setPlayAttack(response.data.attack + response.data.weapon_attack);
+        setPlayDefense(response.data.defense + response.data.weapon_defense);
+        setPlaySpeed(response.data.speed + response.data.weapon_speed);
       })
       .catch((error) => {
         // Handle error
@@ -105,14 +110,14 @@ export default function Home({
       });
   }
 
-  if (weapons && name && hp && weaponName && playAttack && attack) {
+  if (weapons && name && hp && playAttack && attack) {
     return (
       <>
         <div className=" text-center mt-10">
           <h1 className="title text-6xl">Simple Adventure</h1>
         </div>
         <div className="flex items-center mx-5 mt-5">
-          <div className="flex flex-col w-2/3 m-auto mt-10">
+          <div className="flex flex-col w-4/5 m-auto mt-10">
             <img
               src="/src/temp-img/paladin.png"
               alt="avatar"
@@ -137,10 +142,10 @@ export default function Home({
                 >
                   <Box className="absolute top-1/4 left-1/3 w-1/3 border-2 border-solid border-black bg-white shadow-lg shadow-black overflow-auto max-w-screen-2xl">
                     <div className="flex flex-col text-center my-2">
-                      <span>Attack: {weapon.attack}</span>
-                      <span>Damage: {weapon.damage}</span>
-                      <span>Defense: {weapon.defense}</span>
-                      <span>Speed: {weapon.speed}</span>
+                      <span>Attack: {weaponAttack}</span>
+                      <span>Damage: {damage}</span>
+                      <span>Defense: {weaponDefense}</span>
+                      <span>Speed: {weaponSpeed}</span>
                       {weaponName === "Basic Sword" && (
                         <span className="flex justify-center">
                           <img
@@ -178,7 +183,7 @@ export default function Home({
                 </Modal>
               </p>
               <Tooltip
-                title={`Player(${attack}) + Weapon(${weapon.attack})`}
+                title={`Player(${attack}) + Weapon(${weaponAttack})`}
                 placement="right"
               >
                 <p className="font-cursive ml-2 text-2xl">
@@ -186,7 +191,7 @@ export default function Home({
                 </p>
               </Tooltip>
               <Tooltip
-                title={`Player(${defense}) + Weapon(${weapon.defense})`}
+                title={`Player(${defense}) + Weapon(${weaponDefense})`}
                 placement="right"
               >
                 <p className="font-cursive ml-2 text-2xl">
@@ -194,7 +199,7 @@ export default function Home({
                 </p>
               </Tooltip>
               <Tooltip
-                title={`Player(${speed}) + Weapon(${weapon.speed})`}
+                title={`Player(${speed}) + Weapon(${weaponSpeed})`}
                 placement="right"
               >
                 <p className="font-cursive ml-2 text-2xl">Speed: {playSpeed}</p>
