@@ -259,10 +259,10 @@ export default function CreatePlayer() {
                 )}
                 {selectedWeapon && (
                   <div>
-                    <div>Attack: {selectedWeapon.attack}</div>
+                    <div>Attack Bonus: {selectedWeapon.attack}</div>
                     <div>Damage: {selectedWeapon.damage}</div>
-                    <div>Defense: {selectedWeapon.defense}</div>
-                    <div>Speed: {selectedWeapon.speed}</div>
+                    <div>Defense Bonus: {selectedWeapon.defense}</div>
+                    <div>Speed Bonus: {selectedWeapon.speed}</div>
                   </div>
                 )}
               </div>
