@@ -119,7 +119,7 @@ export default function Home({
         <div className="flex items-center mx-5 mt-5">
           <div className="flex flex-col w-4/5 m-auto mt-10">
             <img
-              src="/src/temp-img/paladin.png"
+              src="src/temp-img/paladin.png"
               alt="avatar"
               className="mb-5 h-48 self-center"
             ></img>
