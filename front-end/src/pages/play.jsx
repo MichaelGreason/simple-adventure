@@ -17,7 +17,8 @@ export default function Play({
   damage,
 }) {
   const [enemy, setEnemy] = useState();
-  const [roll, setRoll] = useState();
+  const [roll, setRoll] = useState("");
+  const [rolls, setRolls] = useState([]);
   const navigate = useNavigate();
   const an = [11, 18];
   const [enemyName, setEnemyName] = useState();
@@ -27,6 +28,7 @@ export default function Play({
   const [enemyDefense, setEnemyDefense] = useState();
   const [enemySpeed, setEnemySpeed] = useState();
   const token = useContext(TokenContext);
+  const [text, setText] = useState("");
 
   useEffect(() => {
     axios
@@ -53,7 +55,9 @@ export default function Play({
   }, [enemy]);
 
   function rollDie() {
-    setRoll(_.random(1, 20));
+    const newRoll = _.random(1, 20);
+    setRoll(newRoll);
+    setRolls((prevRolls) => [newRoll, ...prevRolls]);
     console.log(roll);
   }
 
@@ -131,11 +135,15 @@ export default function Play({
         <div className=" border-t-4">
           {" "}
           <div className="text-2xl font-cursive ml-2">
-            {roll > 0
-              ? an.includes(roll)
-                ? `You rolled an ${roll} `
-                : `You rolled a ${roll} `
-              : "Roll!"}
+            {rolls.map((r, index) => (
+              <div key={index}>
+                {r > 0
+                  ? an.includes(r)
+                    ? `You rolled an ${r} `
+                    : `You rolled a ${r} `
+                  : ""}
+              </div>
+            ))}
           </div>
         </div>
       </>
