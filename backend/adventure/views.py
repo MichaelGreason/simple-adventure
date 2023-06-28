@@ -33,6 +33,7 @@ class BasicWeapons(generics.ListAPIView):
     queryset = Weapon.objects.filter(Q(name__contains='Basic'))
 
 
+# COMBAT FUNCTIONS
 def roll_d20():
     roll = random.randint(1, 20)
     return roll
