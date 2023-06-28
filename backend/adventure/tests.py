@@ -1,18 +1,29 @@
 from django.test import TestCase
 from .models import User, Enemy, Weapon
-from .views import roll_d20, player_attack, enemy_attack, determine_initiative
+from .views import roll_d20, player_attack
 
 
-# Fetch user, enemy, and weapon instances for testing
-user = User.objects.get(id=1)  # Replace <user_id> with the actual user ID
-enemy = Enemy.objects.get(id=1)  # Replace <enemy_id> with the actual enemy ID
+class GameplayTestCase(TestCase):
+    def setUp(self):
+        # Create test instances of User, Enemy, and Weapon
+        self.user = User.objects.create(username='test_user', attack=10)
+        self.enemy = Enemy.objects.create(name='test_enemy', defense=5)
+        self.weapon = Weapon.objects.create(name='test_weapon', damage=8)
+
+        # Assign the weapon to the user and enemy
+        self.user.weapon = self.weapon
+        self.user.save()
+        self.enemy.weapon = self.weapon
+        self.enemy.save()
+
+    def test_player_attack(self):
+        # Call the player_attack function
+        attack_result = player_attack(self.user, self.enemy)
+
+        # Assert the expected outcome based on your game logic
+        self.assertEqual(attack_result, expected_result)
 
 
-attack_result = player_attack(user, enemy)
-print("Player attack result:", attack_result)
-
-# enemy_attack_result = enemy_attack(user, enemy)
-# print("Enemy attack result:", enemy_attack_result)
-
-# initiative_result = determine_initiative(user, enemy)
-# print("Initiative result:", initiative_result)
+# Execute the tests
+if __name__ == '__main__':
+    unittest.main()
