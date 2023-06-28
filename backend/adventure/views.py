@@ -42,14 +42,11 @@ def player_attack(request, enemy_id):
     player = request.user
     enemy = Enemy.objects.get(id=enemy_id)
 
-    player_weapon = player.weapon
-    enemy_weapon = enemy.weapon
-
-    player_attack = player.attack + player_weapon.attack + roll_d20()
-    enemy_defense = enemy.defense + enemy_weapon.defense
+    player_attack = player.attack + player.weapon.attack + roll_d20()
+    enemy_defense = enemy.defense + enemy.weapon.defense
 
     if player_attack > enemy_defense:
-        enemy.hit_points -= player_weapon.damage
+        enemy.hit_points -= player.weapon.damage
         # enemy.save()
     return enemy
 
@@ -58,14 +55,11 @@ def enemy_attack(request, enemy_id):
     enemy = Enemy.objects.get(id=enemy_id)
     player = request.user
 
-    enemy_weapon = enemy.weapon
-    player_weapon = player.weapon
-
-    enemy_attack = enemy.attack + enemy_weapon.attack + roll_d20()
-    player_defense = player.defense + player_weapon.defense
+    enemy_attack = enemy.attack + enemy.weapon.attack + roll_d20()
+    player_defense = player.defense + player.weapon.defense
 
     if enemy_attack > player_defense:
-        player.hit_points -= enemy_weapon.damage
+        player.hit_points -= enemy.weapon.damage
         # player.save()
     return player
 
