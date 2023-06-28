@@ -38,25 +38,36 @@ def roll_d20():
     return roll
 
 
-def player_attack(request, enemy):
+def player_attack(request, enemy_id):
     player = request.user
+    enemy = Enemy.objects.get(id=enemy_id)
+
     player_weapon = player.weapon
     enemy_weapon = enemy.weapon
+
     player_attack = player.attack + player_weapon.attack + roll_d20()
     enemy_defense = enemy.defense + enemy_weapon.defense
 
     if player_attack > enemy_defense:
         enemy.hit_points -= player_weapon.damage
+        # enemy.save()
     return enemy
 
 
-def enemy_attack(user, enemy):
-    weapon = enemy.weapon
-    if weapon:
-        enemy_attack = Enemy.attack + Enemy.weapon.attack + roll_d20()
-        player_defense = User.defense + User.weapon.defense
-        if enemy_attack > player_defense:
-            User.hit_points -= Enemy.weapon.damage
+def enemy_attack(request, enemy_id):
+    enemy = Enemy.objects.get(id=enemy_id)
+    player = request.user
+
+    enemy_weapon = enemy.weapon
+    player_weapon = player.weapon
+
+    enemy_attack = enemy.attack + enemy_weapon.attack + roll_d20()
+    player_defense = player.defense + player_weapon.defense
+
+    if enemy_attack > player_defense:
+        player.hit_points -= enemy_weapon.damage
+        # player.save()
+    return player
 
 
 def determine_initiative(request, enemy_id):
