@@ -42,11 +42,13 @@ def player_attack(request, enemy):
     player = request.user
     player_weapon = player.weapon
     enemy_weapon = enemy.weapon
-    if player_weapon:
-        player_attack = player.attack + player_weapon.attack + roll_d20()
-        enemy_defense = enemy.defense + enemy_weapon.defense
-        if player_attack > enemy_defense:
-            enemy.hit_points -= player_weapon.damage
+    # if player_weapon:
+    player_attack = player.attack + player_weapon.attack + roll_d20()
+    enemy_defense = enemy.defense + enemy_weapon.defense
+
+    if player_attack > enemy_defense:
+        enemy.hit_points -= player_weapon.damage
+    return enemy
 
 
 def enemy_attack(user, enemy):
@@ -70,4 +72,4 @@ def determine_initiative(user, enemy):
         pass
     else:
         # roll again
-        determine_initiative()
+        determine_initiative(user, enemy)
