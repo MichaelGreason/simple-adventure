@@ -72,11 +72,27 @@ def determine_initiative(request, enemy_id):
     enemy_speed = enemy.speed + enemy.weapon.speed + roll_d20()
 
     if player_speed > enemy_speed:
-        # player attacks first
-        pass
+        return 'player initiative'
+
     elif player_speed < enemy_speed:
-        # enemy attacks first
-        pass
+        return 'enemy initiative'
+
     else:
         # roll again
         determine_initiative(request, enemy_id)
+
+
+def combat(request, enemy_id):
+    player = request.user
+    enemy = Enemy.objects.get(id=enemy_id)
+    initiative = determine_initiative()
+
+    while player.hit_points > 0 and enemy.hit_points > 0:
+        if initiative == 'player initiative':
+            player_attack()
+            enemy_attack()
+            continue
+        if initiative == 'enemy initiative':
+            enemy_attack()
+            player_attack()
+            continue
